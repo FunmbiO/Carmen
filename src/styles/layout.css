@@ -44,7 +44,11 @@
   padding: 34px max(18px, env(safe-area-inset-left, 0px)) 150px max(18px, env(safe-area-inset-right, 0px));
   display: flex; flex-direction: column; gap: 28px;
 }
-.view[hidden] { display: none; }
+/* Pages that are not open stay rendered but out of sight, so their music players keep working. */
+.view[hidden] {
+  display: flex; position: absolute; left: -10000px; top: 0; width: min(800px, 100vw);
+  visibility: hidden; pointer-events: none;
+}
 
 .dock {
   position: absolute; z-index: 6; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px));

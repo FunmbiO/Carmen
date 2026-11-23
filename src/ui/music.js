@@ -29,6 +29,9 @@ function pauseEntry(entry, key) {
 function kick(key) {
   const entry = players.get(key);
   if (!entry || entry.mode !== 'yt' || !entry.ready) return;
+  const now = Date.now();
+  if (now - (entry.lastKick || 0) < 500) return; // the tap and the page opening both ask; once is enough
+  entry.lastKick = now;
   try { entry.player.playVideo(); } catch { /* retried on the next tap */ }
   clearTimeout(entry.timer);
   entry.timer = setTimeout(() => { if (current === key && !entry.started) setHint(entry.card, true); }, 4000);
@@ -62,10 +65,14 @@ function onState(key, e) {
 function onError(key) {
   const entry = players.get(key);
   if (!entry) return;
+  const now = Date.now();
+  if (now - (entry.lastError || 0) < 1500) return; // one failed video can report twice
+  entry.lastError = now;
   const next = SONGS[key].yt[entry.idx + 1];
   if (!next) { toSpotify(key); return; }
   entry.idx += 1;
   entry.started = false;
+  entry.lastKick = Date.now();
   // Only the visible page may start playing; the others just line up the next video.
   if (current === key) entry.player.loadVideoById(next);
   else entry.player.cueVideoById(next);

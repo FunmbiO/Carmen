@@ -44,20 +44,20 @@ export function createBouquet3D(canvas, { onCount } = {}) {
   const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 0.92;
 
   const scene = new Scene();
   const pmrem = new PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environmentIntensity = 0.5;
+  scene.environmentIntensity = 0.38;
 
   const camera = new PerspectiveCamera(35, 1, 0.1, 50);
   camera.position.set(0.4, 0.7, 6.4);
 
-  const hemi = new HemisphereLight(0xfff3dd, 0x3a2a1a, 0.7);
-  const key = new DirectionalLight(0xfff0d6, 2.3);
+  const hemi = new HemisphereLight(0xfff3dd, 0x3a2a1a, 0.5);
+  const key = new DirectionalLight(0xfff0d6, 1.8);
   key.position.set(3, 4.5, 3.5);
-  const rim = new DirectionalLight(0xffd9a0, 1.5);
+  const rim = new DirectionalLight(0xffd9a0, 1.2);
   rim.position.set(-3.5, 2.5, -3);
   scene.add(hemi, key, rim);
 
@@ -167,7 +167,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     stemMat.color = hsl(P.leaf[0], P.leaf[1] / 100, P.leaf[2] / 100);
     wrap.setRibbonColor(P.ribbon[2]);
     rim.color = new Color(`rgb(${P.glow})`);
-    renderer.toneMappingExposure = P.light ? 0.95 : 1.05;
+    renderer.toneMappingExposure = P.light ? 0.88 : 0.95;
   }
 
   PLAN.forEach((s, i) => addBranch(s, i * 0.18));

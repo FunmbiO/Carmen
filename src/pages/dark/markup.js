@@ -21,7 +21,7 @@ export const darkMarkup = `
     <p class="answer" id="answer" aria-live="polite">&nbsp;</p>
   </div>
   ${codeBlock('chance.js', 'code-chance')}
-  ${soundCard('Whatever She Wants', 'Bryson Tiller · late night', 'Bryson Tiller Whatever She Wants')}
+  ${soundCard('dark')}
   <div class="row"><a class="btn" href="#bloom">Back to the flower</a></div>
 `;
 

@@ -11,7 +11,7 @@ export const bloomMarkup = `
     <canvas id="cv-bloom" role="img" aria-label="A glowing gold flower with a centre made of code symbols, growing at dusk beside smaller flowers and fireflies."></canvas>
   </div>
   <div class="row">
-    <button id="begin" class="btn primary" type="button"><span data-sound-label>Begin with sound</span></button>
+    <button id="begin" class="btn primary" type="button"><span data-sound-label>Play ambient music</span></button>
     <button id="again" class="btn" type="button">Bloom again</button>
     <button id="plant" class="btn" type="button">Plant one</button>
   </div>
@@ -21,8 +21,8 @@ export const bloomMarkup = `
     <figcaption><span>carmen.js</span><span>◆</span></figcaption>
     <pre><code id="code-bloom"></code></pre>
   </figure>
-  ${soundCard('Like a Tattoo', 'Sade · quiet storm', 'Sade Like a Tattoo')}
-  <p class="fine">The music here is made live in your browser to echo these artists. The links open the real songs.</p>
+  ${soundCard('bloom')}
+  <p class="fine">Soft ambient music plays in the background. Press Play the song on any page to hear the real track instead.</p>
   ${nextLink('#bouquet')}
 `;
 

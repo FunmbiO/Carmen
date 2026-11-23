@@ -65,9 +65,8 @@ function onState(key, e) {
 function onError(key) {
   const entry = players.get(key);
   if (!entry) return;
-  const now = Date.now();
-  if (now - (entry.lastError || 0) < 1500) return; // one failed video can report twice
-  entry.lastError = now;
+  if (entry.handledIdx === entry.idx) return; // one failed video can report twice
+  entry.handledIdx = entry.idx;
   const next = SONGS[key].yt[entry.idx + 1];
   if (!next) { toSpotify(key); return; }
   entry.idx += 1;

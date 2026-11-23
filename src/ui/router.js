@@ -52,7 +52,7 @@ export function startRouter() {
     const now = performance.now() / 1000;
     const dt = Math.min(0.05, now - last);
     last = now;
-    if (cur && cur.scene.draw) cur.scene.draw(now, dt);
+    if (!document.hidden && cur && cur.scene.draw) cur.scene.draw(now, dt);
     requestAnimationFrame(loop);
   };
   route();

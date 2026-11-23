@@ -26,7 +26,7 @@ Add `?intro=0` to the address, or open a page directly such as `#bouquet`, to sk
 | Router, dock, scroll, cursor, effects | `src/ui/` |
 | Themes and styles | `src/lib/theme.js`, `src/styles/` |
 
-More detail: [design](docs/design.md), [architecture](docs/architecture.md), [credits](docs/credits.md).
+More detail: [design](docs/design.md), [architecture](docs/architecture.md), [hosting](docs/hosting.md), [credits](docs/credits.md).
 
 ## Git
 

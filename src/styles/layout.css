@@ -76,3 +76,8 @@
 }
 .cursor-glow.on-action { width: 74px; height: 74px; }
 :root[data-theme='ivory'] .cursor-glow { mix-blend-mode: multiply; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow, .route-line { display: none; }
+  .eq i { animation: none !important; height: 8px !important; }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "carmen",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small gift, built in code.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:single": "SINGLE_FILE=1 vite build --outDir dist-single",
+    "preview": "vite preview"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

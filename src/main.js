@@ -21,6 +21,7 @@ import { mountBouquet } from './pages/bouquet/index.js';
 import { mountGolden } from './pages/golden/index.js';
 import { mountDark } from './pages/dark/index.js';
 import { mountDust } from './ui/dust.js';
+import { mountCursor } from './ui/cursor.js';
 import { mountSoundToggle } from './ui/sound-toggle.js';
 import { Sound } from './audio/engine.js';
 import { PAGE_MOODS } from './audio/page-moods.js';
@@ -31,6 +32,7 @@ mountDock();
 startScroll();
 mountSoundToggle();
 mountDust();
+mountCursor();
 
 mountBloom();
 mountBouquet();

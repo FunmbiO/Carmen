@@ -48,3 +48,21 @@
 .sound.spotify .sound-player { aspect-ratio: auto; height: 152px; }
 .sound-hint { flex: 1 1 100%; font: 400 12px var(--mono); letter-spacing: 0.06em; color: var(--accent); }
 .sound-hint[hidden] { display: none; }
+
+/* Bloom: the 3D bouquet */
+.bouquet-note {
+  max-width: 34em; padding-left: 18px; border-left: 2px solid var(--accent);
+  font: italic 500 clamp(18px, 4.4vw, 23px)/1.5 var(--display); color: var(--ink);
+}
+.stage-3d { position: relative; background: radial-gradient(70% 60% at 50% 42%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 75%), var(--stage); }
+.stage-3d canvas { cursor: grab; touch-action: pan-y; outline-offset: -4px; }
+.stage-3d canvas:active { cursor: grabbing; }
+.stage-hint {
+  position: absolute; left: 50%; bottom: 18px; z-index: 3; transform: translateX(-50%); white-space: nowrap; pointer-events: none;
+  padding: 7px 14px; font: 500 10.5px var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute);
+  background: var(--glass); border: 1px solid var(--line-soft); transition: opacity 0.8s var(--ease);
+}
+.stage-hint.gone { opacity: 0; }
+.stage-fallback { padding: 60px 24px; text-align: center; color: var(--mute); }
+.bouquet-tools .btn { padding: 14px 20px; }
+.bouquet-tools .btn:disabled { opacity: 0.5; cursor: default; }

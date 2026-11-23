@@ -9,7 +9,7 @@
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* Noir, Emerald & Gold (default) */
+/* Noir, Emerald & Gold. Also the fallback if no theme is set. */
 :root,
 :root[data-theme='noir'] {
   --bg: #07090a;
@@ -54,7 +54,7 @@
   color-scheme: dark;
 }
 
-/* Ivory & Bordeaux (light) */
+/* Ivory & Bordeaux (light). The default theme, set on <html> in index.html. */
 :root[data-theme='ivory'] {
   --bg: #f6efe3;
   --bg-glow-a: rgba(143, 165, 138, 0.35);

@@ -28,7 +28,8 @@ export function mountBloom() {
         api = m.createBouquet3D(canvas, { onCount: setCount });
         api.onInteract(quietHint);
         setCount(api.count());
-      }).catch(() => {
+      }).catch((err) => {
+        console.error('The 3D bouquet could not start', err);
         failed = true;
         $('bouquetFallback').hidden = false;
         canvas.hidden = true;

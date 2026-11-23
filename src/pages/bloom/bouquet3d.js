@@ -20,9 +20,9 @@ export const MAX_FLOWERS = 16;
 
 // type, hue, saturation, lightness, size. The first is the centrepiece.
 const PLAN = [
-  ['rose', 42, 0.8, 0.58, 1.35], ['daisy', 22, 0.8, 0.6, 1.0], ['rose', 55, 0.78, 0.6, 1.05], ['tulip', 30, 0.85, 0.55, 1.0],
-  ['rose', 15, 0.78, 0.55, 1.1], ['daisy', 48, 0.35, 0.86, 0.95], ['tulip', 55, 0.8, 0.6, 0.95], ['rose', 22, 0.7, 0.62, 1.0],
-  ['daisy', 60, 0.8, 0.62, 0.9],
+  ['rose', 42, 0.85, 0.58, 1.8], ['daisy', 22, 0.85, 0.6, 1.4], ['rose', 55, 0.82, 0.6, 1.4], ['tulip', 30, 0.9, 0.55, 1.35],
+  ['rose', 15, 0.82, 0.55, 1.45], ['daisy', 48, 0.35, 0.88, 1.3], ['tulip', 55, 0.85, 0.6, 1.3], ['rose', 22, 0.75, 0.62, 1.35],
+  ['daisy', 60, 0.85, 0.62, 1.25],
 ];
 const EXTRA = ['rose', 'daisy', 'tulip'];
 
@@ -35,9 +35,9 @@ function hsl(h, s, l) {
 }
 
 function slotFor(i) {
-  if (i === 0) return new Vector3(0, 1.55, 0);
-  const r = 0.34 * Math.sqrt(i), a = i * GOLDEN;
-  return new Vector3(r * Math.cos(a), 1.5 - 0.52 * Math.pow(r / 1.05, 2) + rnd(-0.04, 0.04), r * Math.sin(a));
+  if (i === 0) return new Vector3(0, 0.98, 0);
+  const r = 0.27 * Math.sqrt(i), a = i * GOLDEN;
+  return new Vector3(r * Math.cos(a), 0.86 - 0.42 * Math.pow(r / 0.95, 2) + rnd(-0.03, 0.03), r * Math.sin(a));
 }
 
 export function createBouquet3D(canvas, { onCount } = {}) {
@@ -102,7 +102,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
   const sprigs = new Group();
   sprigs.position.copy(GATHER);
   for (let i = 0; i < 8; i++) {
-    const a = (i / 8) * Math.PI * 2 + rnd(-0.2, 0.2), r = rnd(0.75, 1.15), y = rnd(1.65, 2.0);
+    const a = (i / 8) * Math.PI * 2 + rnd(-0.2, 0.2), r = rnd(0.7, 1.05), y = rnd(1.15, 1.45);
     const tip = new Vector3(Math.cos(a) * r, y, Math.sin(a) * r);
     const curve = new CatmullRomCurve3([new Vector3(0, 0, 0), new Vector3(tip.x * 0.3, tip.y * 0.5, tip.z * 0.3), tip]);
     sprigs.add(new Mesh(new TubeGeometry(curve, 16, 0.009, 5, false), stemMat));
@@ -176,7 +176,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
 
   // Camera and controls.
   const controls = new OrbitControls(camera, canvas);
-  controls.target.set(0, 0.3, 0);
+  controls.target.set(0, 0.05, 0);
   controls.enablePan = false;
   controls.enableZoom = false; // keeps the page scrollable over the canvas
   controls.enableDamping = true;
@@ -245,8 +245,8 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     canvas.style.height = h + 'px';
     camera.aspect = w / h;
     const half = Math.tan((camera.fov * Math.PI) / 360);
-    const needW = 2.9 / (2 * half * Math.min(1, camera.aspect)); // bouquet width in view
-    const needH = 4.4 / (2 * half);
+    const needW = 3.0 / (2 * half * Math.min(1, camera.aspect)); // bouquet width in view
+    const needH = 3.7 / (2 * half);
     const dist = Math.max(needW, needH);
     const dir = camera.position.clone().sub(controls.target).normalize();
     camera.position.copy(controls.target).addScaledVector(dir, dist);
@@ -283,7 +283,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     const i = branches.length;
     const type = EXTRA[i % 3];
     const hues = [42, 30, 52, 22, 60, 36, 15, 48];
-    const b = addBranch([type, hues[i % hues.length], rnd(0.7, 0.85), rnd(0.55, 0.64), rnd(0.9, 1.1)], 0);
+    const b = addBranch([type, hues[i % hues.length], rnd(0.75, 0.88), rnd(0.55, 0.64), rnd(1.2, 1.45)], 0);
     b.age = 0;
     controls.autoRotate = false;
     clearTimeout(resumeTimer);

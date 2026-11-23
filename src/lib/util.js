@@ -15,7 +15,8 @@ export function fit(cv, heightFor) {
   const w = cv.parentElement.clientWidth;
   if (!w) return null;
   const h = heightFor(w);
-  const d = Math.min(window.devicePixelRatio || 1, 2);
+  // Phones get a lower cap: the canvases are large and redrawn every frame.
+  const d = Math.min(window.devicePixelRatio || 1, window.innerWidth < 640 ? 1.5 : 2);
   cv.width = Math.round(w * d);
   cv.height = Math.round(h * d);
   cv.style.height = h + 'px';

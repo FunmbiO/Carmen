@@ -7,6 +7,7 @@ import './styles/theme-switch.css';
 import './styles/intro.css';
 import './styles/page-common.css';
 import './styles/bouquet.css';
+import './styles/golden.css';
 import { initTheme } from './lib/theme.js';
 import { mountThemeSwitch } from './ui/theme-switch.js';
 import { mountDock } from './ui/dock.js';
@@ -15,6 +16,7 @@ import { startScroll, scrollTop } from './ui/scroll.js';
 import { playIntro } from './intro/intro.js';
 import { mountBloom } from './pages/bloom/index.js';
 import { mountBouquet } from './pages/bouquet/index.js';
+import { mountGolden } from './pages/golden/index.js';
 import { mountDust } from './ui/dust.js';
 import { mountSoundToggle } from './ui/sound-toggle.js';
 import { Sound } from './audio/engine.js';
@@ -29,9 +31,10 @@ mountDust();
 
 // Pages register themselves here as they are built.
 const empty = { enter() {}, leave() {}, resize() {}, draw() {} };
-['golden-hour', 'after-dark'].forEach((n) => registerPage(n, { scene: empty }));
+['after-dark'].forEach((n) => registerPage(n, { scene: empty }));
 mountBloom();
 mountBouquet();
+mountGolden();
 onPage((name) => { scrollTop(); Sound.setMood(PAGE_MOODS[name]); });
 
 // Greet first visitors. A deep link (#bouquet) or ?intro=0 goes straight in.

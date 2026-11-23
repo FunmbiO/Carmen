@@ -52,3 +52,9 @@ a { color: inherit; }
   .foil { animation: none; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
 }
+
+::selection { background: var(--accent); color: var(--accent-ink); }
+.views { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.views::-webkit-scrollbar { width: 6px; }
+.views::-webkit-scrollbar-thumb { background: var(--line); }
+pre { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }

@@ -30,6 +30,7 @@ mountThemeSwitch(document.getElementById('theme-host'));
 mountDock();
 startScroll();
 mountSoundToggle();
+(window.requestIdleCallback || setTimeout)(() => Sound.preload());
 mountDust();
 mountCursor();
 

@@ -1,0 +1,9 @@
+.theme-switch { display: inline-flex; gap: 6px; }
+.theme-chip {
+  display: flex; width: 34px; height: 22px; padding: 2px; cursor: pointer;
+  background: transparent; border: 1px solid var(--line); border-radius: 0;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.theme-chip i { flex: 1; display: block; }
+.theme-chip:hover { transform: translateY(-1px); }
+.theme-chip[aria-checked='true'] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--accent); }

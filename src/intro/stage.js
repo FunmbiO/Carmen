@@ -60,7 +60,10 @@ export function createStage(canvas) {
     camera.position.set(0, 0, Math.max(4.6, need));
     camera.updateProjectionMatrix();
     const visH = 2 * half * camera.position.z;
-    points.position.y = visH * (w > h ? 0.04 : 0.16);
+    // Wide screens: smaller flower, higher, so the greeting has the lower half to itself.
+    const wide = camera.aspect > 1.1;
+    points.scale.setScalar(wide ? 0.66 : 1);
+    points.position.y = visH * (wide ? 0.22 : 0.16);
     uniforms.uScale.value = (h * dpr) / (2 * half);
   }
 

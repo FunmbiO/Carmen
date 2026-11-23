@@ -33,7 +33,7 @@
 }
 .intro-eyebrow { font: 500 11px var(--mono); letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); opacity: 0; }
 .intro-name {
-  position: relative; font-size: clamp(54px, 15.5vw, 176px); white-space: nowrap; padding: 0.04em 0.12em 0.16em;
+  position: relative; font-size: clamp(54px, min(15.5vw, 21vh), 176px); white-space: nowrap; padding: 0.04em 0.12em 0.16em;
 }
 .intro-name span { display: inline-block; }
 .intro-nib {
@@ -58,3 +58,8 @@
   .intro-name { font-size: clamp(44px, 9vw, 90px); }
   .intro-sub { font-size: 20px; }
 }
+
+:root[data-theme='ivory'] .intro-glow {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--second) 22%, transparent), transparent 72%);
+}
+@media (min-aspect-ratio: 11/10) { .intro-glow { top: 30%; width: min(60vh, 560px); } }

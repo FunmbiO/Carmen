@@ -9,15 +9,19 @@ import { mountThemeSwitch } from './ui/theme-switch.js';
 import { mountDock } from './ui/dock.js';
 import { startRouter, onPage, registerPage } from './ui/router.js';
 import { startScroll, scrollTop } from './ui/scroll.js';
+import { mountSoundToggle } from './ui/sound-toggle.js';
+import { Sound } from './audio/engine.js';
+import { PAGE_MOODS } from './audio/page-moods.js';
 
 initTheme();
 mountThemeSwitch(document.getElementById('theme-host'));
 mountDock();
 startScroll();
+mountSoundToggle();
 
 // Pages register themselves here as they are built.
 const empty = { enter() {}, leave() {}, resize() {}, draw() {} };
 ['bloom', 'bouquet', 'golden-hour', 'after-dark'].forEach((n) => registerPage(n, { scene: empty }));
-onPage(() => scrollTop());
+onPage((name) => { scrollTop(); Sound.setMood(PAGE_MOODS[name]); });
 
 startRouter();

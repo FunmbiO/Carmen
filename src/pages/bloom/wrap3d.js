@@ -28,8 +28,12 @@ function paperGeometry() {
     const r = Math.hypot(x, z);
     // Crumpled folds, stronger toward the open rim.
     const fold = 1 + 0.03 * Math.sin(a * 7 + 0.4) * (0.3 + t) + 0.07 * t * t * Math.sin(a * 5 + 0.7);
-    pos.setXZ(i, Math.cos(a) * r * fold, Math.sin(a) * r * fold);
-    pos.setY(i, pos.getY(i) + (PAPER_BOTTOM + h / 2) + 0.07 * t * t * Math.sin(a * 3 + 1.2));
+    pos.setXYZ(
+      i,
+      Math.cos(a) * r * fold,
+      pos.getY(i) + (PAPER_BOTTOM + h / 2) + 0.07 * t * t * Math.sin(a * 3 + 1.2),
+      Math.sin(a) * r * fold,
+    );
     const shade = 0.86 + 0.14 * Math.sin(a * 7 + 0.4) * (0.4 + t * 0.6);
     col[i * 3] = col[i * 3 + 1] = col[i * 3 + 2] = shade;
   }

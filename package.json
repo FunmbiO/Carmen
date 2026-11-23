@@ -29,5 +29,8 @@
     "tone": "^15.1.22",
     "typed.js": "^3.0.0",
     "vanilla-tilt": "^1.8.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

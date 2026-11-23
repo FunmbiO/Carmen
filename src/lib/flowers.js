@@ -55,7 +55,7 @@ export function drawHead(c, f, hx, hy, size, b, now) {
     c.fillStyle = gr;
     c.strokeStyle = P.light ? `hsla(${hh},60%,22%,0.35)` : `hsla(${hh + 12},100%,90%,0.5)`;
     c.lineWidth = 1;
-    if (f.glow && l === 0) { c.shadowColor = `rgba(${P.glow},0.6)`; c.shadowBlur = size * 0.25; }
+    if (f.glow && l === 0) { c.shadowColor = `rgba(${P.glow},0.5)`; c.shadowBlur = size * 0.18; }
     else { c.shadowBlur = 0; c.shadowColor = 'transparent'; }
     for (let i = 0; i < f.petals; i++) {
       c.save();

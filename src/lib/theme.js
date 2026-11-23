@@ -6,7 +6,7 @@ const listeners = new Set();
 export const PALETTES = {
   noir: {
     id: 'noir', label: 'Noir', light: false, swatch: ['#07090a', '#0f3d2e', '#e7c26a'], meta: '#07090a',
-    hue: (h) => Math.min(h, 62), sat: 1, dl: 0,
+    hue: (h) => Math.min(h, 56) * 0.93, sat: 1, dl: 0,
     bloomBg: ['#0e1a12', '#24170b', '#4a2a0e'], bqBg: ['#13200f', '#2a1a0e'],
     glow: '242,177,52', bokeh: '255,214,120', fly: '255,210,122', vig: '4,5,3',
     stem: 'hsl(125,32%,32%)', blade: 'hsl(130,30%,22%)', leaf: [125, 36, 30], ground: '26,36,18',

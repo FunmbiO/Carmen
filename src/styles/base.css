@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+body {
+  font: 400 16px/1.6 var(--sans);
+  color: var(--ink);
+  background:
+    radial-gradient(900px 640px at 6% -8%, var(--bg-glow-a), transparent 62%),
+    radial-gradient(820px 620px at 108% 108%, var(--bg-glow-b), transparent 60%),
+    var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  transition: background-color 0.6s var(--ease), color 0.6s var(--ease);
+}
+
+h1, h2, h3, p, figure { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+a { color: inherit; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* Gold foil text. The gradient is a theme token, so it recolours with the palette. */
+.foil {
+  background: var(--foil);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 9s ease-in-out infinite alternate;
+}
+@keyframes shimmer { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+
+.script { font-family: var(--script); font-weight: 400; line-height: 1; padding-bottom: 0.12em; }
+
+.eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  font: 500 11px var(--mono); letter-spacing: 0.3em; text-transform: uppercase; color: var(--mute);
+}
+.eyebrow em { font: italic 500 20px/1 var(--display); letter-spacing: 0; text-transform: none; color: var(--accent); }
+.eyebrow::after { content: ''; height: 1px; width: 56px; background: linear-gradient(90deg, var(--accent), transparent); }
+
+:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .foil { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}

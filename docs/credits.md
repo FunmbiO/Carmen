@@ -22,7 +22,7 @@ Pinyon Script, Bodoni Moda, Instrument Sans and DM Mono, all under the SIL Open 
 
 ## Songs
 
-Each page has a Spotify player for the real track, started automatically when the page opens (ids live in `src/pages/songs.js`). Spotify plays the full song when she is signed in to Spotify in the same browser, and a 30 second preview otherwise. The optional Ambient button plays generated music.
+Each page plays the real track in a YouTube player (ids in `src/pages/songs.js`), with Spotify as the fallback and for the "Open in Spotify" links. The optional Ambient button plays generated music.
 
 - Sade, "Like a Tattoo"
 - Jhené Aiko, "Stranger"

@@ -8,7 +8,37 @@
     <meta name="description" content="A small gift, built in code." />
   </head>
   <body>
-    <div id="app"></div>
+    <div class="app" id="app">
+      <header class="topbar">
+        <a class="crest" href="#bloom" aria-label="Back to the start"><span class="script">C</span></a>
+        <span class="brand">Made for Carmen</span>
+        <div class="tools">
+          <div id="theme-host"></div>
+          <button id="snd" class="snd" type="button" aria-pressed="false">
+            <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span id="sndLabel">Sound off</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="views" id="views">
+        <div class="views-inner" id="views-inner">
+          <section class="view" id="v-bloom" hidden></section>
+          <section class="view" id="v-bouquet" hidden></section>
+          <section class="view" id="v-golden-hour" hidden></section>
+          <section class="view" id="v-after-dark" hidden></section>
+        </div>
+      </div>
+
+      <nav class="dock chamfer" aria-label="Pages">
+        <a href="#bloom" data-p="bloom"><i data-lucide="flower-2"></i><span class="num">I</span><span class="lbl">Bloom</span></a>
+        <a href="#bouquet" data-p="bouquet"><i data-lucide="flower"></i><span class="num">II</span><span class="lbl">Bouquet</span></a>
+        <a href="#golden-hour" data-p="golden-hour"><i data-lucide="sunset"></i><span class="num">III</span><span class="lbl">Golden</span></a>
+        <a href="#after-dark" data-p="after-dark"><i data-lucide="moon"></i><span class="num">IV</span><span class="lbl">Dark</span></a>
+      </nav>
+    </div>
+
+    <div id="intro" hidden></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -2,6 +2,7 @@ import { $ } from '../../lib/util.js';
 import { registerPage } from '../../ui/router.js';
 import { typeCode } from '../../ui/typewriter.js';
 import { mountTilt } from '../../ui/tilt.js';
+import { bindSongPlayers, unmountSongPlayers } from '../../ui/song-player.js';
 import { goldBurst } from '../../ui/confetti.js';
 import { revealLines, revealBlocks } from '../../ui/reveal.js';
 import { darkMarkup, chanceCode } from './markup.js';
@@ -12,6 +13,7 @@ export function mountDark() {
   root.innerHTML = darkMarkup;
   const rain = createRain($('cv-dark'));
   const answer = $('answer');
+  bindSongPlayers(root);
 
   $('yes').addEventListener('click', () => {
     answer.textContent = "That's all I'm asking. Thank you for reading this far.";
@@ -26,6 +28,7 @@ export function mountDark() {
   registerPage('after-dark', {
     scene: {
       ...rain.scene,
+      leave() { unmountSongPlayers(root); },
       enter() {
         rain.scene.enter();
         mountTilt(root);

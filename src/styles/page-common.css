@@ -40,3 +40,10 @@
 @media (prefers-reduced-motion: reduce) { .view:not([hidden]) > * { animation: none; } }
 
 .bloom-name { font-size: clamp(104px, 28vw, 230px); line-height: 0.9; margin-left: -0.02em; }
+
+.sound-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.sound-actions .btn { padding: 13px 20px; }
+.sound-player { flex: 1 1 100%; min-width: 0; }
+.sound-player[hidden] { display: none; }
+.sound-player iframe { display: block; width: 100%; height: 152px; border: 0; }
+.sound.playing .sound-actions { display: none; }

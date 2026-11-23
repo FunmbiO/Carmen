@@ -21,6 +21,6 @@ export const bouquetMarkup = `
     <p class="foil">That's the whole bouquet.</p>
     <a class="btn primary" href="#golden-hour">Continue</a>
   </div>
-  ${soundCard('Stranger', 'Jhené Aiko · dreamy, weightless', 'Jhene Aiko stranger')}
+  ${soundCard('bouquet')}
   ${nextLink('#golden-hour', 'Continue', false)}
 `;

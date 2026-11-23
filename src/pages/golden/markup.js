@@ -18,6 +18,6 @@ export const goldenMarkup = `
     <p class="capline" id="gLine">The first thing I think of when I think of you.</p>
   </div>
   ${codeBlock('sun.js', 'code-sun')}
-  ${soundCard('Solo', 'Future · the sound darkens with the sun', 'Future Solo HNDRXX')}
+  ${soundCard('golden')}
   ${nextLink('#after-dark')}
 `;

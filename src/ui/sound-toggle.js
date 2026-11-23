@@ -7,9 +7,9 @@ export function mountSoundToggle() {
   const label = $('sndLabel');
   const sync = (on) => {
     btn.setAttribute('aria-pressed', String(on));
-    label.textContent = on ? 'Sound on' : 'Sound off';
+    label.textContent = on ? 'Ambient on' : 'Ambient off';
     document.querySelectorAll('[data-sound-label]').forEach((el) => {
-      el.textContent = on ? 'Sound is on' : 'Begin with sound';
+      el.textContent = on ? 'Ambient music is on' : 'Play ambient music';
     });
   };
   Sound.onChange(sync);

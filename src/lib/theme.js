@@ -22,7 +22,7 @@ export const PALETTES = {
   },
   ivory: {
     id: 'ivory', label: 'Ivory', light: true, swatch: ['#f6efe3', '#5a1624', '#b08d3e'], meta: '#f6efe3',
-    hue: (h) => 345 + (h - 42) * 0.5, sat: 0.85, dl: -8,
+    hue: (h) => 348 + (h - 42) * 0.4, sat: 0.68, dl: -10,
     bloomBg: ['#f6efe3', '#efe2c8', '#e0cda6'], bqBg: ['#f6efe3', '#ead9b8'],
     glow: '176,141,62', bokeh: '176,141,62', fly: '176,141,62', vig: '90,60,40',
     stem: 'hsl(110,22%,34%)', blade: 'hsl(110,20%,38%)', leaf: [110, 24, 36], ground: '160,140,100',

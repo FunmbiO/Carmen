@@ -14,7 +14,7 @@ export function soundCard(key) {
         <a class="btn" href="${spotifyUrl(s)}" target="_blank" rel="noopener">Open in Spotify</a>
       </div>
       <div class="sound-player"><div class="sound-target"></div></div>
-      <p class="sound-hint" hidden>Your browser held the music back. Tap play on the player above.</p>
+      <p class="sound-hint" hidden>Tap anywhere to start the song.</p>
     </div>`;
 }
 

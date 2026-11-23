@@ -8,15 +8,17 @@ import './styles/intro.css';
 import './styles/page-common.css';
 import './styles/bouquet.css';
 import './styles/golden.css';
+import './styles/dark.css';
 import { initTheme } from './lib/theme.js';
 import { mountThemeSwitch } from './ui/theme-switch.js';
 import { mountDock } from './ui/dock.js';
-import { startRouter, onPage, registerPage } from './ui/router.js';
+import { startRouter, onPage } from './ui/router.js';
 import { startScroll, scrollTop } from './ui/scroll.js';
 import { playIntro } from './intro/intro.js';
 import { mountBloom } from './pages/bloom/index.js';
 import { mountBouquet } from './pages/bouquet/index.js';
 import { mountGolden } from './pages/golden/index.js';
+import { mountDark } from './pages/dark/index.js';
 import { mountDust } from './ui/dust.js';
 import { mountSoundToggle } from './ui/sound-toggle.js';
 import { Sound } from './audio/engine.js';
@@ -29,12 +31,10 @@ startScroll();
 mountSoundToggle();
 mountDust();
 
-// Pages register themselves here as they are built.
-const empty = { enter() {}, leave() {}, resize() {}, draw() {} };
-['after-dark'].forEach((n) => registerPage(n, { scene: empty }));
 mountBloom();
 mountBouquet();
 mountGolden();
+mountDark();
 onPage((name) => { scrollTop(); Sound.setMood(PAGE_MOODS[name]); });
 
 // Greet first visitors. A deep link (#bouquet) or ?intro=0 goes straight in.

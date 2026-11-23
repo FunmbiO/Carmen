@@ -13,7 +13,9 @@ The site asks search engines not to index it (`robots.txt`, a meta tag and an `X
 
 ## Songs
 
-The in-page players are Spotify embeds, so they work on the hosted site but not inside sandboxed viewers that block iframes. Spotify plays the full track when she is signed in to Spotify in the same browser, and a 30 second preview otherwise.
+Each page has a Spotify player (iFrame API) that starts its song when the page opens and pauses when she leaves. Browsers allow sound only after she has tapped something, and tapping Enter on the opening screen and the dock both count. Some phones, iPhones especially, can still block it, and then the player's own play button is the fallback and a small hint appears.
+
+Spotify plays the full track when she is signed in to Spotify in the same browser, and a 30 second preview otherwise. The players do not work inside sandboxed viewers that block iframes.
 
 ## Custom domain
 

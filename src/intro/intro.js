@@ -1,6 +1,5 @@
 import { gsap } from 'gsap';
 import { createStage } from './stage.js';
-import { Sound } from '../audio/engine.js';
 import { mountThemeSwitch } from '../ui/theme-switch.js';
 import { onTheme } from '../lib/theme.js';
 import { REDUCE } from '../lib/util.js';
@@ -68,7 +67,7 @@ export function playIntro() {
     q('#intro-enter').addEventListener('click', () => {
       if (entered) return;
       entered = true;
-      Sound.start(); // needs the click, so it starts here
+      // This tap is what lets the browser play the first song, so nothing else is needed here.
       const out = gsap.timeline({
         onComplete() {
           off();

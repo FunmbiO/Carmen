@@ -9,6 +9,7 @@ import './styles/page-common.css';
 import './styles/bouquet.css';
 import './styles/golden.css';
 import './styles/dark.css';
+import './styles/vinyl.css';
 import { initTheme } from './lib/theme.js';
 import { mountThemeSwitch } from './ui/theme-switch.js';
 import { mountDock } from './ui/dock.js';

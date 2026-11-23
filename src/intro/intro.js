@@ -3,6 +3,7 @@ import { createStage } from './stage.js';
 import { mountThemeSwitch } from '../ui/theme-switch.js';
 import { onTheme } from '../lib/theme.js';
 import { REDUCE } from '../lib/util.js';
+import { playPage } from '../ui/music.js';
 
 const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
 
@@ -67,7 +68,7 @@ export function playIntro() {
     q('#intro-enter').addEventListener('click', () => {
       if (entered) return;
       entered = true;
-      // This tap is what lets the browser play the first song, so nothing else is needed here.
+      playPage('bloom'); // started inside this tap, which is what lets the browser play it
       const out = gsap.timeline({
         onComplete() {
           off();

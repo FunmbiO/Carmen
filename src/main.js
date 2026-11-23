@@ -14,12 +14,14 @@ import { mountThemeSwitch } from './ui/theme-switch.js';
 import { mountDock } from './ui/dock.js';
 import { startRouter, onPage } from './ui/router.js';
 import { startScroll, scrollTop } from './ui/scroll.js';
+import { playPageTransition } from './ui/transition.js';
 import { playIntro } from './intro/intro.js';
 import { mountBloom } from './pages/bloom/index.js';
 import { mountBouquet } from './pages/bouquet/index.js';
 import { mountGolden } from './pages/golden/index.js';
 import { mountDark } from './pages/dark/index.js';
 import { mountDust } from './ui/dust.js';
+import { mountCursor } from './ui/cursor.js';
 import { mountSoundToggle } from './ui/sound-toggle.js';
 import { Sound } from './audio/engine.js';
 import { PAGE_MOODS } from './audio/page-moods.js';
@@ -30,12 +32,19 @@ mountDock();
 startScroll();
 mountSoundToggle();
 mountDust();
+mountCursor();
 
 mountBloom();
 mountBouquet();
 mountGolden();
 mountDark();
-onPage((name) => { scrollTop(); Sound.setMood(PAGE_MOODS[name]); });
+let firstPage = true;
+onPage((name) => {
+  scrollTop();
+  Sound.setMood(PAGE_MOODS[name]);
+  if (!firstPage) playPageTransition();
+  firstPage = false;
+});
 
 // Greet first visitors. A deep link (#bouquet) or ?intro=0 goes straight in.
 const skipIntro = location.hash.length > 1 || new URLSearchParams(location.search).get('intro') === '0';

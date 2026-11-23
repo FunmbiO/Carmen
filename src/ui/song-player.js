@@ -11,7 +11,6 @@ function mount(card) {
   const frame = document.createElement('iframe');
   frame.src = embedUrl(s);
   frame.title = `${s.title} by ${s.by}`;
-  frame.height = s.kind === 'album' ? '152' : '152';
   frame.loading = 'lazy';
   frame.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
   slot.appendChild(frame);

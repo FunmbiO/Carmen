@@ -18,7 +18,7 @@ function options() {
     detectRetina: true,
     particles: {
       number: { value: 44, density: { enable: true, width: 900, height: 900 } },
-      color: { value: toHex(P.fly) },
+      paint: { fill: { enable: true, color: { value: toHex(P.fly) } } },
       opacity: { value: { min: 0.08, max: P.light ? 0.5 : 0.6 }, animation: { enable: !REDUCE, speed: 0.5, sync: false } },
       size: { value: { min: 0.6, max: 2.4 } },
       move: { enable: !REDUCE, speed: 0.35, direction: 'top', random: true, straight: false, outModes: { default: 'out' } },

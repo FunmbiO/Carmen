@@ -1,0 +1,77 @@
+/* Design tokens. Three themes share one set of names; scenes and UI read only these. */
+:root {
+  --display: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, Georgia, serif;
+  --sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'DM Mono', ui-monospace, Menlo, Consolas, monospace;
+  --script: 'Pinyon Script', 'Snell Roundhand', cursive;
+
+  --chamfer: 14px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Noir, Emerald & Gold (default) */
+:root,
+:root[data-theme='noir'] {
+  --bg: #07090a;
+  --bg-glow-a: rgba(15, 61, 46, 0.7);
+  --bg-glow-b: rgba(160, 98, 24, 0.3);
+  --panel: #0d1210;
+  --ink: #f6e7c1;
+  --mute: #b4a98c;
+  --dim: #7b735d;
+  --accent: #e7c26a;
+  --accent-hi: #fff0b8;
+  --accent-ink: #1a1306;
+  --second: #e8b4a0;
+  --leaf: #9bd08a;
+  --line: rgba(231, 194, 106, 0.24);
+  --line-soft: rgba(231, 194, 106, 0.12);
+  --glass: rgba(10, 14, 12, 0.72);
+  --foil: linear-gradient(120deg, #fff0b8 0%, #f2c75c 26%, #b9801f 48%, #f6d982 70%, #fff0b8 100%);
+  --stage: #0b140f;
+  color-scheme: dark;
+}
+
+/* Terracotta & Honey Sunset */
+:root[data-theme='terra'] {
+  --bg: #1c110b;
+  --bg-glow-a: rgba(181, 83, 46, 0.55);
+  --bg-glow-b: rgba(233, 169, 59, 0.28);
+  --panel: #26170f;
+  --ink: #f3e2c4;
+  --mute: #c2aa88;
+  --dim: #8a7358;
+  --accent: #e9a93b;
+  --accent-hi: #ffd98a;
+  --accent-ink: #1c0f06;
+  --second: #e07a52;
+  --leaf: #a9b86a;
+  --line: rgba(233, 169, 59, 0.28);
+  --line-soft: rgba(233, 169, 59, 0.14);
+  --glass: rgba(28, 17, 11, 0.74);
+  --foil: linear-gradient(120deg, #ffd98a 0%, #e9a93b 28%, #b5532e 52%, #f0b955 72%, #ffd98a 100%);
+  --stage: #1a0f09;
+  color-scheme: dark;
+}
+
+/* Ivory & Bordeaux (light) */
+:root[data-theme='ivory'] {
+  --bg: #f6efe3;
+  --bg-glow-a: rgba(143, 165, 138, 0.35);
+  --bg-glow-b: rgba(176, 141, 62, 0.25);
+  --panel: #efe5d3;
+  --ink: #1b1412;
+  --mute: #5b4d44;
+  --dim: #8a7a6b;
+  --accent: #5a1624;
+  --accent-hi: #7b1f33;
+  --accent-ink: #f6efe3;
+  --second: #b08d3e;
+  --leaf: #5f7a5a;
+  --line: rgba(90, 22, 36, 0.3);
+  --line-soft: rgba(90, 22, 36, 0.14);
+  --glass: rgba(246, 239, 227, 0.8);
+  --foil: linear-gradient(120deg, #7b1f33 0%, #5a1624 30%, #b08d3e 52%, #7b1f33 74%, #5a1624 100%);
+  --stage: #f1e6d2;
+  color-scheme: light;
+}

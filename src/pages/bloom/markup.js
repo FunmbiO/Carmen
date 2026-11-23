@@ -1,0 +1,36 @@
+import { soundCard, nextLink } from '../parts.js';
+
+export const bloomMarkup = `
+  <div class="page-head">
+    <span class="eyebrow"><em>I</em> Bloom</span>
+    <h1 class="bloom-name script foil">Carmen</h1>
+    <div class="gems"><span>Gold</span><i></i><span>Honey</span><i></i><span>Earth</span><i></i><span>Sunset</span></div>
+    <p class="lead">I built you a flower out of code.</p>
+  </div>
+  <div class="stage frame">
+    <canvas id="cv-bloom" role="img" aria-label="A glowing gold flower with a centre made of code symbols, growing at dusk beside smaller flowers and fireflies."></canvas>
+  </div>
+  <div class="row">
+    <button id="begin" class="btn primary" type="button"><span data-sound-label>Begin with sound</span></button>
+    <button id="again" class="btn" type="button">Bloom again</button>
+    <button id="plant" class="btn" type="button">Plant one</button>
+  </div>
+  <span class="hint">Tap the garden to plant more flowers.</span>
+  <div class="orn" aria-hidden="true"><i></i></div>
+  <figure class="code panel">
+    <figcaption><span>carmen.js</span><span>◆</span></figcaption>
+    <pre><code id="code-bloom"></code></pre>
+  </figure>
+  ${soundCard('Like a Tattoo', 'Sade · quiet storm', 'Sade Like a Tattoo')}
+  <p class="fine">The music here is made live in your browser to echo these artists. The links open the real songs.</p>
+  ${nextLink('#bouquet')}
+`;
+
+export const bloomCode = `<span class="k">const</span> carmen = <span class="k">new</span> <span class="f">Flower</span>({
+  petals: <span class="n">8</span>,
+  layers: <span class="n">5</span>,
+  hue: <span class="n">42</span>, <span class="c">// honey</span>
+  seed: <span class="f">goldenAngle</span>, <span class="c">// 137.5°</span>
+});
+
+carmen.<span class="f">bloom</span>();`;

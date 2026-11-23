@@ -30,9 +30,10 @@ export const PALETTES = {
   },
 };
 
-export const THEME_ORDER = ['noir', 'terra', 'ivory'];
+export const DEFAULT_THEME = 'ivory';
+export const THEME_ORDER = ['ivory', 'noir', 'terra'];
 
-let current = 'noir';
+let current = 'ivory';
 
 export function palette() {
   return PALETTES[current];
@@ -43,7 +44,7 @@ export function currentTheme() {
 }
 
 export function setTheme(id, { persist = true } = {}) {
-  if (!PALETTES[id]) id = 'noir';
+  if (!PALETTES[id]) id = DEFAULT_THEME;
   current = id;
   document.documentElement.dataset.theme = id;
   const meta = document.querySelector('meta[name="theme-color"]');
@@ -62,5 +63,5 @@ export function onTheme(fn) {
 export function initTheme() {
   let saved = null;
   try { saved = localStorage.getItem(KEY); } catch { /* ignore */ }
-  setTheme(PALETTES[saved] ? saved : 'noir', { persist: false });
+  setTheme(PALETTES[saved] ? saved : DEFAULT_THEME, { persist: false });
 }

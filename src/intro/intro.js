@@ -22,6 +22,9 @@ const MARKUP = `
     </div>
   </div>
   <button class="intro-skip" id="intro-skip" type="button">Tap to skip</button>
+  <div class="intro-gate" id="intro-gate">
+    <button class="gate-btn" id="intro-begin" type="button"><i class="gate-dot"></i><span>Tap to begin</span><small>Sound on</small></button>
+  </div>
 `;
 
 /** Plays the opening. Resolves when the visitor has entered and the screen is gone. */
@@ -42,7 +45,9 @@ export function playIntro() {
     const skip = q('#intro-skip');
     let entered = false;
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    // The opening waits behind a tap. Browsers only allow sound after a tap, and this one starts the music.
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, paused: true });
+    const gate = q('#intro-gate');
     if (REDUCE) {
       u.uProgress.value = 1;
       gsap.set([q('.intro-glow'), q('.intro-top'), q('.intro-eyebrow'), q('.intro-sub'), q('.intro-cta')], { opacity: 1 });
@@ -61,6 +66,12 @@ export function playIntro() {
         .to(skip, { opacity: 0.8, duration: 0.6 }, 1.2)
         .to(skip, { opacity: 0, duration: 0.4 }, 6.0);
     }
+
+    q('#intro-begin').addEventListener('click', () => {
+      playPage('dark'); // "Whatever She Wants" plays under the opening
+      gsap.to(gate, { opacity: 0, duration: 0.9, ease: 'power1.inOut', onComplete: () => gate.remove() });
+      tl.play();
+    });
 
     skip.addEventListener('click', () => tl.timeScale(6));
     q('.intro-canvas').addEventListener('pointerdown', () => { if (tl.time() < 6) tl.timeScale(6); });

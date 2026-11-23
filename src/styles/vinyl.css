@@ -1,0 +1,71 @@
+/* The vinyl sound card. The YouTube player is kept in the page so the music plays, but it is never shown. */
+.sound.vinyl { display: block; padding: 24px; }
+.deck { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+
+.disc {
+  position: relative; flex: none; width: clamp(150px, 44vw, 200px); aspect-ratio: 1; padding: 0; margin-right: clamp(0px, 4vw, 26px);
+  background: none; border: 0; border-radius: 50%; cursor: pointer;
+}
+.record {
+  position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%;
+  background:
+    conic-gradient(from 20deg, rgba(255,255,255,0) 0 6%, rgba(255,255,255,0.14) 11%, rgba(255,255,255,0) 20% 52%, rgba(255,255,255,0.1) 61%, rgba(255,255,255,0) 72%),
+    repeating-radial-gradient(circle at 50% 50%, #0a0a0b 0 2px, #151517 2px 3px);
+  box-shadow: 0 22px 38px -18px rgba(0, 0, 0, 0.65), inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+  animation: spin 3.4s linear infinite; animation-play-state: paused;
+}
+.is-playing .record { animation-play-state: running; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.label {
+  display: grid; place-items: center; width: 36%; aspect-ratio: 1; border-radius: 50%; position: relative;
+  background: var(--foil); background-size: 200% 100%;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.18);
+}
+.label::after { content: ''; position: absolute; width: 11%; aspect-ratio: 1; border-radius: 50%; background: #0a0a0b; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4); }
+.label-mark { position: absolute; top: 14%; font-size: clamp(20px, 5.5vw, 26px); line-height: 1; padding: 0; color: var(--accent-ink); }
+
+.arm { position: absolute; right: -22%; top: -10%; width: 52%; height: auto; overflow: visible; pointer-events: none; filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.35)); }
+.arm-pivot { transform-box: view-box; transform-origin: 78px 16px; transform: rotate(-26deg); transition: transform 1s var(--ease); }
+.is-playing .arm-pivot { transform: rotate(5deg); }
+.arm-base { fill: var(--panel); stroke: var(--accent); stroke-width: 2; }
+.arm-dot { fill: var(--accent); }
+.arm-bar { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+.arm-head { fill: var(--accent); }
+
+.deck-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1 1 220px; }
+.deck-info .tag { font: 500 10.5px var(--mono); letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
+.deck-info .song { font: italic 500 clamp(28px, 7vw, 38px)/1.08 var(--display); padding-bottom: 0.06em; }
+.deck-info .by { font: 400 11.5px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); }
+
+.transport { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.play-pause {
+  display: grid; place-items: center; width: 44px; height: 44px; flex: none; cursor: pointer; padding: 0;
+  color: var(--accent-ink); background: var(--foil); background-size: 200% 100%; border: 0; border-radius: 0;
+  transition: background-position 0.4s var(--ease), transform 0.3s var(--ease);
+}
+.play-pause:hover { background-position: 100% 0; transform: translateY(-1px); }
+.play-pause .i-pause { display: none; }
+.is-playing .play-pause .i-play { display: none; }
+.is-playing .play-pause .i-pause { display: block; }
+
+.scrub { position: relative; flex: 1; height: 22px; display: flex; align-items: center; cursor: pointer; min-width: 60px; }
+.scrub::before { content: ''; position: absolute; left: 0; right: 0; height: 2px; background: var(--line); }
+.scrub-fill { position: relative; display: block; height: 2px; width: 0; background: var(--accent); }
+.scrub-fill::after { content: ''; position: absolute; right: -5px; top: -4px; width: 10px; height: 10px; background: var(--accent); transform: rotate(45deg); }
+.time { font: 400 11px var(--mono); letter-spacing: 0.08em; color: var(--mute); font-variant-numeric: tabular-nums; min-width: 4.5ch; text-align: right; }
+
+.open-link { align-self: flex-start; margin-top: 8px; font: 500 10.5px var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+.open-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* The video player: present so the song plays, never visible. */
+.sound.vinyl:not(.spotify) .sound-player {
+  position: absolute; right: 0; bottom: 0; width: 240px; height: 135px; opacity: 0; pointer-events: none; overflow: hidden; aspect-ratio: auto; background: none;
+}
+.sound.vinyl .sound-hint { margin-top: 14px; }
+
+/* If YouTube cannot play a song, the Spotify player takes over inside the card. */
+.sound.vinyl.spotify .transport { display: none; }
+.sound.vinyl.spotify .sound-player { margin-top: 18px; }
+
+@media (prefers-reduced-motion: reduce) { .record { animation: none; } .arm-pivot { transition: none; } }

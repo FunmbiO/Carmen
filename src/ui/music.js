@@ -195,9 +195,7 @@ function bindControls() {
     entry.scrub.addEventListener('keydown', (e) => {
       if (entry.mode !== 'yt' || !entry.ready || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
       e.preventDefault();
-      const d = entry.player.getDuration() || 0;
       entry.player.seekTo(Math.max(0, entry.player.getCurrentTime() + (e.key === 'ArrowRight' ? 10 : -10)), true);
-      if (!d) return;
     });
   });
 }

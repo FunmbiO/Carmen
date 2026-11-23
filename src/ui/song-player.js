@@ -48,7 +48,6 @@ async function create(card, key) {
         Sound.stop(); // the ambient music steps aside for the real song
       }
     });
-    if (current === key) start(card, key);
   });
   return entry;
 }

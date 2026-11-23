@@ -30,9 +30,9 @@ export const vertex = /* glsl */ `
     gl_Position = projectionMatrix * mv;
 
     float tw = 0.62 + 0.38 * sin(uTime * 2.0 + aRand.w * 40.0);
-    float world = 0.006 + aRand.z * 0.016;
+    float world = 0.006 + aRand.z * 0.017;
     gl_PointSize = world * uScale / -mv.z * (1.0 + (1.0 - e) * 0.6);
-    vAlpha = (0.22 + 0.78 * e) * tw * (1.0 - uExplode);
+    vAlpha = (0.2 + 0.8 * e) * (0.7 + 0.3 * tw) * (1.0 - uExplode);
     vHeat = aRand.z;
   }
 `;

@@ -11,7 +11,7 @@ export function buildFlowerGeometry(count) {
   const seed = new Float32Array(count * 4); // delay, swirl, size, phase
 
   const petals = 8;
-  const layers = 5;
+  const layers = 3;
   const centre = Math.floor(count * 0.12);
 
   for (let i = 0; i < count; i++) {
@@ -25,13 +25,16 @@ export function buildFlowerGeometry(count) {
       z = 0.12;
     } else {
       const l = Math.floor(Math.pow(Math.random(), 0.8) * layers);
-      const L = 1 - l * 0.17;
+      const L = 1 - l * 0.24;
       const Wd = L * 0.4;
       const u = Math.pow(Math.random(), 0.8);
       const w = Wd * Math.pow(Math.sin(Math.PI * Math.pow(u, 0.75)), 0.85);
       // Weight some points to the petal edge so the outline reads.
-      const edge = Math.random() < 0.38;
-      const v = edge ? (Math.random() < 0.5 ? -1 : 1) : rnd(-1, 1);
+      const roll = Math.random();
+      let v;
+      if (roll < 0.72) v = Math.random() < 0.5 ? -1 : 1; // outline
+      else if (roll < 0.86) v = 0; // centre vein
+      else v = rnd(-0.8, 0.8); // soft fill
       const px = v * w;
       const py = u * L;
       const a = (l * Math.PI) / petals + l * 0.18 + Math.floor(Math.random() * petals) * (TAU / petals);

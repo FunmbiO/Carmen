@@ -61,6 +61,7 @@ function kick(key) {
   const now = Date.now();
   if (now - (entry.lastKick || 0) < 500) return; // the tap and the page opening both ask; once is enough
   entry.lastKick = now;
+  if (entry.playing) { ramp(entry, 100, FADE_MS); return; } // already going: just make sure it is at full volume
   try {
     entry.vol = 0;
     entry.player.setVolume(0);

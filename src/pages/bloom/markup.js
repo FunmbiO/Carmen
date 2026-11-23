@@ -11,8 +11,7 @@ export const bloomMarkup = `
     <canvas id="cv-bloom" role="img" aria-label="A glowing gold flower with a centre made of code symbols, growing at dusk beside smaller flowers and fireflies."></canvas>
   </div>
   <div class="row">
-    <button id="begin" class="btn primary" type="button"><span data-sound-label>Play ambient music</span></button>
-    <button id="again" class="btn" type="button">Bloom again</button>
+    <button id="again" class="btn primary" type="button">Bloom again</button>
     <button id="plant" class="btn" type="button">Plant one</button>
   </div>
   <span class="hint">Tap the garden to plant more flowers.</span>
@@ -22,7 +21,7 @@ export const bloomMarkup = `
     <pre><code id="code-bloom"></code></pre>
   </figure>
   ${soundCard('bloom')}
-  <p class="fine">Soft ambient music plays in the background. Press Play the song on any page to hear the real track instead.</p>
+  <p class="fine">Each page plays its own song. If your browser holds the music back, press play on the player.</p>
   ${nextLink('#bouquet')}
 `;
 

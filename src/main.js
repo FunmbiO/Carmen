@@ -15,7 +15,6 @@ import { mountDock } from './ui/dock.js';
 import { startRouter, onPage } from './ui/router.js';
 import { startScroll, scrollTop } from './ui/scroll.js';
 import { playPageTransition } from './ui/transition.js';
-import { playIntro } from './intro/intro.js';
 import { mountBloom } from './pages/bloom/index.js';
 import { mountBouquet } from './pages/bouquet/index.js';
 import { mountGolden } from './pages/golden/index.js';
@@ -31,6 +30,7 @@ mountThemeSwitch(document.getElementById('theme-host'));
 mountDock();
 startScroll();
 mountSoundToggle();
+(window.requestIdleCallback || setTimeout)(() => Sound.preload());
 mountDust();
 mountCursor();
 
@@ -49,6 +49,10 @@ onPage((name) => {
 // Greet first visitors. A deep link (#bouquet) or ?intro=0 goes straight in.
 const skipIntro = location.hash.length > 1 || new URLSearchParams(location.search).get('intro') === '0';
 (async () => {
-  if (!skipIntro) await playIntro();
+  if (!skipIntro) {
+    // Three.js is only needed for the opening, so it loads on demand.
+    const { playIntro } = await import('./intro/intro.js');
+    await playIntro();
+  }
   startRouter();
 })();

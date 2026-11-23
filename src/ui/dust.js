@@ -14,10 +14,10 @@ function options() {
   return {
     fullScreen: { enable: false },
     background: { color: 'transparent' },
-    fpsLimit: 40,
+    fpsLimit: window.innerWidth < 640 ? 30 : 40,
     detectRetina: true,
     particles: {
-      number: { value: 44, density: { enable: true, width: 900, height: 900 } },
+      number: { value: window.innerWidth < 640 ? 26 : 44, density: { enable: true, width: 900, height: 900 } },
       paint: { fill: { enable: true, color: { value: toHex(P.fly) } } },
       opacity: { value: { min: 0.08, max: P.light ? 0.5 : 0.6 }, animation: { enable: !REDUCE, speed: 0.5, sync: false } },
       size: { value: { min: 0.6, max: 2.4 } },

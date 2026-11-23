@@ -1,0 +1,27 @@
+.banner { overflow: hidden; background: #0c0905; }
+.banner canvas { display: block; width: 100%; touch-action: manipulation; }
+.banner::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, transparent 35%, rgba(8, 8, 6, 0.92));
+}
+.banner .over { position: absolute; left: 24px; bottom: 18px; right: 24px; z-index: 3; pointer-events: none; }
+.banner .over .page-title { color: #f6e7c1; }
+
+.letter { padding: 38px 28px 32px; display: flex; flex-direction: column; gap: 22px; }
+.letter p { font: italic 500 clamp(21px, 5vw, 27px)/1.5 var(--display); }
+.letter .salute { font-family: var(--script); font-style: normal; font-size: clamp(54px, 14vw, 76px); line-height: 1; padding-bottom: 0.14em; }
+.sig { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 18px; border-top: 1px solid var(--line-soft); }
+.signame { font-size: clamp(52px, 13vw, 68px); color: var(--accent); }
+.seal {
+  width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; flex: none; padding: 0;
+  font-size: 40px; line-height: 1; color: #3a2406;
+  background: radial-gradient(circle at 35% 28%, #fff0b8, #d9a441 46%, #8a5a12);
+  box-shadow: inset 0 0 0 3px rgba(255, 240, 190, 0.3), inset 0 -6px 10px rgba(80, 48, 8, 0.4), 0 12px 26px rgba(0, 0, 0, 0.4);
+}
+:root[data-theme='ivory'] .seal { background: radial-gradient(circle at 35% 28%, #b8344f, #7b1f33 50%, #4a0f1c); color: #f6efe3; }
+
+.ask { padding: 32px 26px; display: flex; flex-direction: column; gap: 20px; text-align: center; align-items: stretch; }
+.ask h3 { font: italic 500 clamp(30px, 8vw, 42px)/1.12 var(--display); padding-bottom: 0.08em; }
+.ask .row { flex-direction: column; align-items: stretch; }
+.answer { font: italic 500 clamp(21px, 5vw, 25px)/1.35 var(--display); color: var(--accent); min-height: 34px; }
+@media (min-width: 560px) { .ask .row { flex-direction: row; justify-content: center; } }

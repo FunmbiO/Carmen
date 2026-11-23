@@ -2,17 +2,22 @@ import './styles/fonts.css';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/shapes.css';
+import './styles/layout.css';
 import './styles/theme-switch.css';
 import { initTheme } from './lib/theme.js';
 import { mountThemeSwitch } from './ui/theme-switch.js';
+import { mountDock } from './ui/dock.js';
+import { startRouter, onPage, registerPage } from './ui/router.js';
+import { startScroll, scrollTop } from './ui/scroll.js';
 
 initTheme();
+mountThemeSwitch(document.getElementById('theme-host'));
+mountDock();
+startScroll();
 
-const app = document.getElementById('app');
-app.innerHTML = `
-  <main style="display:grid;place-content:center;gap:24px;height:100%;padding:24px;text-align:center">
-    <p class="script foil" style="font-size:clamp(72px,18vw,160px)">Hey Carmen</p>
-    <div class="orn"><i></i></div>
-    <div id="sw" style="justify-self:center"></div>
-  </main>`;
-mountThemeSwitch(document.getElementById('sw'));
+// Pages register themselves here as they are built.
+const empty = { enter() {}, leave() {}, resize() {}, draw() {} };
+['bloom', 'bouquet', 'golden-hour', 'after-dark'].forEach((n) => registerPage(n, { scene: empty }));
+onPage(() => scrollTop());
+
+startRouter();

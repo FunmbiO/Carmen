@@ -9,6 +9,7 @@ import { mountThemeSwitch } from './ui/theme-switch.js';
 import { mountDock } from './ui/dock.js';
 import { startRouter, onPage, registerPage } from './ui/router.js';
 import { startScroll, scrollTop } from './ui/scroll.js';
+import { mountDust } from './ui/dust.js';
 import { mountSoundToggle } from './ui/sound-toggle.js';
 import { Sound } from './audio/engine.js';
 import { PAGE_MOODS } from './audio/page-moods.js';
@@ -18,6 +19,7 @@ mountThemeSwitch(document.getElementById('theme-host'));
 mountDock();
 startScroll();
 mountSoundToggle();
+mountDust();
 
 // Pages register themselves here as they are built.
 const empty = { enter() {}, leave() {}, resize() {}, draw() {} };

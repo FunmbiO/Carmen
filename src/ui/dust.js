@@ -32,7 +32,7 @@ function options() {
 async function load() {
   if (container) container.destroy();
   container = await tsParticles.load({ id: 'dust', options: options() });
-  if (!active) container.pause();
+  if (container && !active) container.pause();
 }
 
 /** Pause or resume the dust. It fades out while paused so it never looks frozen. */

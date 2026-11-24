@@ -22,7 +22,7 @@ import { mountGolden } from './pages/golden/index.js';
 import { mountDark } from './pages/dark/index.js';
 import { mountDust, setDustActive } from './ui/dust.js';
 import { mountCursor } from './ui/cursor.js';
-import { initMusic } from './ui/music.js';
+import { initMusic, releaseIntro } from './ui/music.js';
 import { mountSoundToggle } from './ui/sound-toggle.js';
 import { Sound } from './audio/engine.js';
 import { PAGE_MOODS } from './audio/page-moods.js';
@@ -66,5 +66,6 @@ const skipIntro = location.hash.length > 1 || new URLSearchParams(location.searc
       intro.innerHTML = '';
     }
   }
+  releaseIntro(); // however she got in, the opening's music player is no longer needed
   startRouter();
 })();

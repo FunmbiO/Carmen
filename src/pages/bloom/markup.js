@@ -23,8 +23,9 @@ export const bloomMarkup = `
   </div>
   <span class="hint" id="bouquetCount" aria-live="polite">26 flowers</span>
   <div class="bouquet-notes">
-    <p class="bouquet-note">Imma preface this by saying I remember what you said. “Imma be real im not trynna be anything other than friends w nb rn” so this isn’t me pushing it. Promise.</p>
-    <p class="bouquet-note">Also, im not gonna pretend as if I know for a fact you like flowers. If anything this seems very cliche and generic. However, even if you did, it would be weirder to send some to you irl. So here's a digital bouquet I made by hand, and you can interact with it.</p>
+    <p class="bouquet-note">I want to preface this by saying, i dont want to be that man thats ruining your peace.</p>
+    <p class="bouquet-note">I remeber your words exactly; “Imma be real im not trynna be anything other than friends w nb rn”. So this isn’t me pushing it. Promise.</p>
+    <p class="bouquet-note">Keeping it P, im not sure if you like flowers. If anything this seems very cliche and generic. However, i thought to give it a lil twist, so here's a digital bouquet I made by hand, and you can interact with it.</p>
   </div>
   <div class="orn" aria-hidden="true"><i></i></div>
   <figure class="code panel">

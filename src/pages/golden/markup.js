@@ -15,7 +15,7 @@ export const goldenMarkup = `
   </div>
   <div class="cap" aria-live="polite">
     <p class="word foil" id="gWord">Gold.</p>
-    <p class="capline" id="gLine">The first thing I think of when I think of you.</p>
+    <p class="capline" id="gLine">The first thing I think of when I see you: you’re very classy and luxurious.</p>
   </div>
   ${codeBlock('sun.js', 'code-sun')}
   ${soundCard('golden')}

@@ -231,12 +231,33 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     controls.update();
   });
 
+  // Resolution adapts to the device. It starts at the sharpest the screen can show (capped lower on phones),
+  // steps down when frames run long, and creeps back up when they are comfortably fast.
+  const DPR_MAX = Math.min(window.devicePixelRatio || 1, window.innerWidth < 640 ? 1.75 : 2);
+  const DPR_MIN = 1;
+  let dpr = DPR_MAX;
+  let size = { w: 360, h: 460 };
+  function applyResolution() {
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(size.w, size.h, false);
+  }
+  let frameEma = 0, lastFrameT = 0, lastAdjust = 0;
+  function adaptResolution() {
+    const t = performance.now();
+    const ft = t - lastFrameT;
+    lastFrameT = t;
+    if (ft > 250 || ft <= 0) return; // a pause or a tab switch, not a slow frame
+    frameEma = frameEma ? frameEma * 0.93 + ft * 0.07 : ft;
+    if (t - lastAdjust < 2500) return;
+    if (frameEma > 30 && dpr > DPR_MIN) { dpr = Math.max(DPR_MIN, +(dpr - 0.25).toFixed(2)); lastAdjust = t; frameEma = 0; applyResolution(); }
+    else if (frameEma < 17.5 && dpr < DPR_MAX && t - lastAdjust > 9000) { dpr = Math.min(DPR_MAX, +(dpr + 0.25).toFixed(2)); lastAdjust = t; frameEma = 0; applyResolution(); }
+  }
+
   function resize() {
     const w = canvas.parentElement.clientWidth || 360;
     const h = clamp(Math.round(w * 1.15), 440, 640);
-    const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 640 ? 1.75 : 2);
-    renderer.setPixelRatio(dpr);
-    renderer.setSize(w, h, false);
+    size = { w, h };
+    applyResolution();
     canvas.style.height = h + 'px';
     camera.aspect = w / h;
     const half = Math.tan((CINEMA.FOV1 * Math.PI) / 360);
@@ -259,7 +280,8 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     b.head.setOpen(easeOutCubic(clamp((b.age - b.delay - openAfter) / 1.4)));
   }
   function draw(now, dt) {
-    if (!isVisible()) return; // scrolled out of sight: no point drawing
+    if (!isVisible()) { lastFrameT = 0; return; } // scrolled out of sight: no point drawing
+    adaptResolution();
     time += dt;
     const playing = cinema.update(dt);
     const k = cinema.lightK();
@@ -343,7 +365,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     max: MAX_FLOWERS,
     visible: isVisible,
     onInteract(fn) { onInteract = fn; },
-    stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles }),
+    stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, pixelRatio: dpr }),
     /** hooks: { start, end } fire during the opening shot. */
     onIntro(h) { Object.assign(introHooks, h); },
   };

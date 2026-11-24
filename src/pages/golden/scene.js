@@ -1,5 +1,6 @@
 import { drawFlies, makeFlies } from '../../lib/ambience.js';
 import { Sound } from '../../audio/engine.js';
+import { watchVisible } from '../../lib/visible.js';
 import { REDUCE, TAU, clamp, rnd, fit, $ } from '../../lib/util.js';
 import { SKY, STAGES } from './data.js';
 
@@ -119,5 +120,7 @@ export function createGolden(cv) {
     leave() { S.active = false; Sound.setTone(1); },
     resize,
     draw,
+    visible: watchVisible(cv),
+    maxFps: 30,
   };
 }

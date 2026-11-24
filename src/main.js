@@ -20,7 +20,7 @@ import { mountBloom } from './pages/bloom/index.js';
 import { mountBouquet } from './pages/bouquet/index.js';
 import { mountGolden } from './pages/golden/index.js';
 import { mountDark } from './pages/dark/index.js';
-import { mountDust } from './ui/dust.js';
+import { mountDust, setDustActive } from './ui/dust.js';
 import { mountCursor } from './ui/cursor.js';
 import { initMusic } from './ui/music.js';
 import { mountSoundToggle } from './ui/sound-toggle.js';
@@ -44,6 +44,7 @@ initMusic();
 let firstPage = true;
 onPage((name) => {
   scrollTop();
+  setDustActive(name !== 'bloom');
   Sound.setMood(PAGE_MOODS[name]);
   if (!firstPage) playPageTransition();
   firstPage = false;

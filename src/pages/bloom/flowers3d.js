@@ -53,7 +53,7 @@ export function petalGeometry(length, width, curl, cup = 0.5, segY = 8, segX = 6
 export function flowerMaterial() {
   return new MeshPhysicalMaterial({
     vertexColors: true, side: DoubleSide, roughness: 0.42, metalness: 0,
-    sheen: 1, sheenRoughness: 0.5, sheenColor: new Color(0xffffff), clearcoat: 0.12, clearcoatRoughness: 0.5,
+    sheen: 1, sheenRoughness: 0.5, sheenColor: new Color(0xffffff),
   });
 }
 
@@ -78,7 +78,8 @@ function makeMorph(rings, step, seed) {
   const closedParts = [];
   const openParts = [];
   rings.forEach((ring, l) => {
-    const base = petalGeometry(ring.len, ring.w, ring.curl, ring.cup, 8, 6, ring.ruffle || 0);
+    // Frilly petals need more cuts across to show the frill; plain ones can be coarser.
+    const base = petalGeometry(ring.len, ring.w, ring.curl, ring.cup, 6, (ring.ruffle || 0) > 0.25 ? 6 : 4, ring.ruffle || 0);
     for (let i = 0; i < ring.n; i++) {
       const yaw = (i * TAU) / ring.n + l * step + (rand() - 0.5) * 0.2;
       const shade = 0.84 + rand() * 0.16;
@@ -168,7 +169,7 @@ function centres() {
     const parts = [];
     for (let j = 1; j <= n; j++) {
       const r = step * Math.sqrt(j), a = j * GOLDEN;
-      const s = new SphereGeometry(radius, 6, 5);
+      const s = new SphereGeometry(radius, 5, 4);
       s.translate(r * Math.cos(a), y0 - r * 0.18, r * Math.sin(a));
       parts.push(addColor(s, 1, 1, 1));
     }
@@ -177,8 +178,8 @@ function centres() {
     return m;
   };
   centreGeo = {
-    daisyDome: dome(0.085, 0.45), daisyDots: dots(64, 0.0125, 0.0092, 0.036),
-    sunDome: dome(0.17, 0.4), sunSeeds: dots(150, 0.0095, 0.0125, 0.062),
+    daisyDome: dome(0.085, 0.45), daisyDots: dots(48, 0.0135, 0.0105, 0.036),
+    sunDome: dome(0.17, 0.4), sunSeeds: dots(110, 0.0105, 0.0147, 0.062),
   };
   return centreGeo;
 }
@@ -205,5 +206,5 @@ export function buildSunflower(mat) {
 
 /** A single leaf, base at the origin and tip along +y. */
 export function leafGeometry(len, w) {
-  return petalGeometry(len, w, 0.18, 0.3, 10, 4, 0);
+  return petalGeometry(len, w, 0.18, 0.3, 8, 3, 0);
 }

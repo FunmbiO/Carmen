@@ -1,5 +1,6 @@
 import { palette } from '../../lib/theme.js';
 import { REDUCE, GLYPHS, clamp, rnd, fit } from '../../lib/util.js';
+import { watchVisible } from '../../lib/visible.js';
 
 // Scene IV: code falling like rain. Pointer or tap makes the nearby columns rush.
 export function createRain(cv) {
@@ -43,6 +44,8 @@ export function createRain(cv) {
     scene: {
       enter: resize, leave() {}, resize,
       draw(now, dt) { if (S.c && !REDUCE) step(dt); },
+      visible: watchVisible(cv),
+      maxFps: 30,
     },
     rush: () => S.cols.forEach((col) => { col.boost = 1; }),
   };

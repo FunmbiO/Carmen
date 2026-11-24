@@ -38,7 +38,7 @@ export function buildLavender(mat) {
     for (let i = 0; i < n; i++) {
       const t = i / (n - 1);
       const a = i * GOLDEN, r = lerp(0.032, 0.008, t);
-      const g = new SphereGeometry(lerp(0.026, 0.016, t), 7, 5);
+      const g = new SphereGeometry(lerp(0.026, 0.016, t), 6, 4);
       g.scale(0.8, 1.55, 0.8);
       g.translate(Math.cos(a) * r, t * 0.55, Math.sin(a) * r);
       parts.push(shadeColor(g, (x, y) => { const k = 0.7 + 0.3 * Math.min(1, y / 0.5); return [k, k, k]; }));
@@ -56,13 +56,13 @@ let hydGeo = null;
 export function buildHydrangea(mat) {
   if (!hydGeo) {
     const parts = [];
-    const n = 100, R = 0.27;
+    const n = 86, R = 0.27;
     const q = new Quaternion();
     for (let i = 0; i < n; i++) {
       // Points spread over a dome with the golden angle.
       const y = 1 - (i + 0.5) / n * 0.95, rr = Math.sqrt(1 - y * y), a = i * GOLDEN;
       const nrm = new Vector3(Math.cos(a) * rr, y, Math.sin(a) * rr);
-      const g = new SphereGeometry(0.052, 8, 6);
+      const g = new SphereGeometry(0.056, 6, 4);
       g.scale(1, 0.48, 1);
       q.setFromUnitVectors(UP, nrm);
       g.applyMatrix4(new Matrix4().compose(nrm.clone().multiplyScalar(R), q, new Vector3(1, 1, 1)));
@@ -86,7 +86,7 @@ export function buildGreens(G) {
   const collar = [];
   for (let i = 0; i < 18; i++) {
     const len = rnd(0.95, 1.35), w = rnd(0.3, 0.42);
-    const g = petalGeometry(len, w, 0.22, 0.3, 10, 4, 0.1);
+    const g = petalGeometry(len, w, 0.22, 0.3, 8, 3, 0.1);
     const az = (i / 18) * TAU + rnd(-0.12, 0.12);
     const tilt = rnd(0.9, 1.4);
     const m = new Matrix4().makeRotationY(az)
@@ -110,7 +110,7 @@ export function buildGreens(G) {
     for (let k = 0; k < 11; k++) {
       const t = 0.18 + (k / 11) * 0.8;
       const p = curve.getPoint(t), tan = curve.getTangent(t);
-      const g = petalGeometry(0.17, 0.15, 0.2, 0.4, 5, 3, 0);
+      const g = petalGeometry(0.17, 0.15, 0.2, 0.4, 4, 3, 0);
       const side = k % 2 ? 1 : -1;
       const q = new Quaternion().setFromUnitVectors(UP, tan.clone().add(new Vector3(side * 0.9, 0.15, side * 0.4)).normalize());
       g.applyMatrix4(new Matrix4().compose(p, q, new Vector3(1, 1, 1)));
@@ -130,7 +130,7 @@ export function buildGreens(G) {
     const curve = new CatmullRomCurve3([new Vector3(0, 0.3, 0), new Vector3(tip.x * 0.3, tip.y * 0.5, tip.z * 0.3), tip]);
     gyp.push(addColor(new TubeGeometry(curve, 12, 0.006, 4, false), 0.45, 0.58, 0.4));
     for (let k = 0; k < 8; k++) {
-      const b = new SphereGeometry(rnd(0.022, 0.034), 7, 5);
+      const b = new SphereGeometry(rnd(0.022, 0.034), 5, 4);
       b.translate(tip.x + rnd(-0.1, 0.1), tip.y + rnd(-0.09, 0.1), tip.z + rnd(-0.1, 0.1));
       gyp.push(addColor(b, 1, 0.98, 0.93));
     }

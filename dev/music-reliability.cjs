@@ -23,7 +23,8 @@ window.YT={PlayerState:{PLAYING:1,PAUSED:2,ENDED:0,BUFFERING:3},Player:function(
 }};
 window.onYouTubeIframeAPIReady&&window.onYouTubeIframeAPIReady();`;
 async function run(name, cfg, steps) {
-  const b = await chromium.launch(); const p = await (await b.newContext({ viewport: { width: 390, height: 900 } })).newPage();
+  // WebGL is off here: this check is about the music, and software-rendering the 3D bouquet starves the page's timers.
+  const b = await chromium.launch({ args: ['--disable-webgl', '--disable-3d-apis'] }); const p = await (await b.newContext({ viewport: { width: 390, height: 900 } })).newPage();
   const errs = []; p.on('pageerror', (e) => errs.push(e.message));
   await p.addInitScript((c) => { window.__cfg = Object.assign({ ignored: 0 }, c); document.addEventListener('pointerup', () => { window.__tapped = true; }, true); }, cfg);
   let apiCalls = 0;

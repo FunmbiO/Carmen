@@ -23,16 +23,11 @@ import { mountDark } from './pages/dark/index.js';
 import { mountDust, setDustActive } from './ui/dust.js';
 import { mountCursor } from './ui/cursor.js';
 import { initMusic, releaseIntro } from './ui/music.js';
-import { mountSoundToggle } from './ui/sound-toggle.js';
-import { Sound } from './audio/engine.js';
-import { PAGE_MOODS } from './audio/page-moods.js';
 
 initTheme();
 mountThemeSwitch(document.getElementById('theme-host'));
 mountDock();
 startScroll();
-mountSoundToggle();
-(window.requestIdleCallback || setTimeout)(() => Sound.preload());
 mountDust().catch((err) => console.warn('The dust layer could not start', err));
 mountCursor();
 
@@ -45,7 +40,6 @@ let firstPage = true;
 onPage((name) => {
   scrollTop();
   setDustActive(name !== 'bloom');
-  Sound.setMood(PAGE_MOODS[name]);
   if (!firstPage) playPageTransition();
   firstPage = false;
 });

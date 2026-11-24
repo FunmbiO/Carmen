@@ -21,7 +21,7 @@
   box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent);
 }
 /* The cursive C has a long left swash, so its ink sits right of the box centre. Offsets measured from the rendered glyph. */
-.crest .script { font-size: 30px; padding: 0; transform: translate(-4.7px, 2px); }
+.crest .script { font-size: 30px; padding: 0; transform: translate(-5.3px, 2px); }
 .brand { font: 500 10.5px var(--mono); letter-spacing: 0.3em; text-transform: uppercase; color: var(--mute); }
 .tools { display: flex; align-items: center; gap: 14px; }
 

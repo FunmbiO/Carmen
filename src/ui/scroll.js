@@ -6,7 +6,8 @@ import { REDUCE } from '../lib/util.js';
 let lenis = null;
 
 export function startScroll() {
-  if (REDUCE) return null;
+  // Touch screens already scroll smoothly, and the engine would only add a frame loop and extra work.
+  if (REDUCE || window.matchMedia('(pointer: coarse)').matches) return null;
   const wrapper = document.getElementById('views');
   const content = document.getElementById('views-inner');
   lenis = new Lenis({ wrapper, content, duration: 1.15, smoothWheel: true, easing: (t) => 1 - Math.pow(1 - t, 3.2) });

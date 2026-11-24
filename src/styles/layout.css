@@ -99,3 +99,7 @@
 
 #dust { transition: opacity 0.8s var(--ease); }
 #dust.rest { opacity: 0; }
+
+/* The opening song's player: on the page so it can play, out of sight. */
+.intro-sound { position: fixed; left: -10000px; top: 0; width: 240px; height: 135px; visibility: hidden; pointer-events: none; }
+.intro-sound .sound-player { width: 100%; height: 100%; aspect-ratio: auto; }

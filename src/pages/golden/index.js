@@ -1,7 +1,6 @@
 import { $ } from '../../lib/util.js';
 import { registerPage } from '../../ui/router.js';
 import { typeCode } from '../../ui/typewriter.js';
-import { mountTilt } from '../../ui/tilt.js';
 import { activateSong, deactivateSong } from '../../ui/music.js';
 import { goldenMarkup } from './markup.js';
 import { createGolden } from './scene.js';
@@ -15,7 +14,7 @@ export function mountGolden() {
     scene: {
       ...scene,
       leave() { scene.leave(); deactivateSong(root); },
-      enter() { scene.enter(); mountTilt(root); activateSong(root); typeCode($('code-sun'), SUN_CODE); },
+      enter() { scene.enter(); activateSong(root); typeCode($('code-sun'), SUN_CODE); },
     },
   });
 }

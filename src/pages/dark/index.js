@@ -1,7 +1,6 @@
 import { $ } from '../../lib/util.js';
 import { registerPage } from '../../ui/router.js';
 import { typeCode } from '../../ui/typewriter.js';
-import { mountTilt } from '../../ui/tilt.js';
 import { activateSong, deactivateSong } from '../../ui/music.js';
 import { goldBurst } from '../../ui/confetti.js';
 import { revealLines, revealBlocks } from '../../ui/reveal.js';
@@ -37,7 +36,6 @@ export function mountDark() {
       leave() { deactivateSong(root); },
       enter() {
         rain.scene.enter();
-        mountTilt(root);
         activateSong(root);
         typeCode($('code-chance'), chanceCode);
         revealLines(root.querySelectorAll('.reveal-lines'));

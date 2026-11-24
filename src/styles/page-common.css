@@ -136,3 +136,5 @@
 /* Scroll reveals (see ui/reveal.js) */
 .rv { opacity: 0; transform: translateY(22px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
 .rv.is-in { opacity: 1; transform: none; }
+.caret { animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }

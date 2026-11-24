@@ -88,7 +88,7 @@ function makeMorph(rings, step, seed) {
         const c = g.attributes.color;
         for (let k = 0; k < c.count; k++) c.setXYZ(k, c.getX(k) * shade, c.getY(k) * shade, c.getZ(k) * shade);
         const m = new Matrix4().makeRotationY(yaw)
-          .multiply(new Matrix4().makeTranslation(0, 0, ring.r))
+          .multiply(new Matrix4().makeTranslation(0, -l * 0.012, ring.r)) // each outer ring sits a touch lower, so petals never share a surface
           .multiply(new Matrix4().makeRotationX(tilt))
           .multiply(new Matrix4().makeScale(scale, scale, scale));
         g.applyMatrix4(m);

@@ -2,6 +2,7 @@ import { $ } from '../../lib/util.js';
 import { registerPage } from '../../ui/router.js';
 import { typeCode } from '../../ui/typewriter.js';
 import { mountTilt } from '../../ui/tilt.js';
+import { scrollPast } from '../../ui/scroll.js';
 import { activateSong, deactivateSong } from '../../ui/music.js';
 import { bloomMarkup, bloomCode } from './markup.js';
 
@@ -50,6 +51,7 @@ export function mountBloom() {
     await loading;
   }
 
+  $('scrollDown').addEventListener('click', () => scrollPast(stage));
   $('again').addEventListener('click', () => api && api.replay());
   $('addFlower').addEventListener('click', () => {
     if (!api) return;

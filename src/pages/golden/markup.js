@@ -10,7 +10,7 @@ export const goldenMarkup = `
     <canvas id="cv-golden" class="touch-surface" role="img" aria-label="A hilltop field at sunset. The sky moves from gold to honey to dusk to a night full of binary stars as the slider moves."></canvas>
   </div>
   <div class="slider">
-    <input id="gSlider" type="range" min="0" max="100" value="22" aria-label="Time of day">
+    <input id="gSlider" class="touch-surface" type="range" min="0" max="100" value="22" aria-label="Time of day">
     <div class="ticks"><span>Gold</span><span>Honey</span><span>Sunset</span><span>Night</span></div>
   </div>
   <div class="cap" aria-live="polite">

@@ -10,8 +10,6 @@ When she taps an answer under "What's the verdict?", the site owner gets a push 
 
 Only the wording of the option and the order are sent. There is no name, address or other detail in the message.
 
-A line under the options tells her that her pick is sent: "Whichever you tap gets sent to me." It is in `src/pages/dark/markup.js` if it ever needs changing.
-
 ## Setting it up (one time)
 
 The notification topic is a long random secret. It is **not** in the code. It lives in the `NTFY_TOPIC` environment variable on the Vercel project (Settings, Environment Variables).

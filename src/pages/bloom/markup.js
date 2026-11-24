@@ -26,7 +26,6 @@ export const bloomMarkup = `
     <pre><code id="code-bloom"></code></pre>
   </figure>
   ${soundCard('bloom')}
-  <p class="fine">Each page plays its own song. If your browser holds the music back, tap the record.</p>
   ${nextLink('#bouquet')}
 `;
 

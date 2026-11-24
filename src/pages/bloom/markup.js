@@ -5,7 +5,6 @@ export const bloomMarkup = `
     <span class="eyebrow"><em>I</em> Bloom</span>
     <h1 class="bloom-name script foil">Carmen</h1>
     <div class="gems"><span>Gold</span><i></i><span>Honey</span><i></i><span>Earth</span><i></i><span>Sunset</span></div>
-    <p class="lead">I built you a bouquet out of code.</p>
     <p class="bouquet-note">I'm not gonna pretend as if I know that you like flowers. However, even if you did, it would be weirder to send some to you. So here's a digital bouquet I made by hand, and you can interact with it.</p>
   </div>
   <div class="stage frame stage-3d">

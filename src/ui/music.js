@@ -116,9 +116,14 @@ function onState(key, e) {
 function onError(key) {
   const entry = players.get(key);
   if (!entry) return;
+  const id = SONGS[key].yt[entry.idx];
+  // Only act on errors from the video we are on. A video we already moved past can still report late.
+  try {
+    const vid = entry.player.getVideoData && entry.player.getVideoData().video_id;
+    if (vid && vid !== id) return;
+  } catch { /* no video data yet */ }
   if (entry.handledIdx === entry.idx) return; // one failed video can report twice
   entry.handledIdx = entry.idx;
-  const id = SONGS[key].yt[entry.idx];
   const next = SONGS[key].yt[entry.idx + 1];
   if (!entry.retriedSame) { // often a passing network or player hiccup: try the same video once more first
     entry.retriedSame = true;

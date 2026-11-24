@@ -55,7 +55,7 @@
   font: italic 500 clamp(18px, 4.4vw, 23px)/1.5 var(--display); color: var(--ink);
 }
 .stage-3d { position: relative; background: radial-gradient(70% 60% at 50% 42%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 75%), var(--stage); }
-.stage-3d canvas { cursor: grab; touch-action: pan-y; outline-offset: -4px; }
+.stage-3d canvas { cursor: grab; outline-offset: -4px; }
 .stage-3d canvas:active { cursor: grabbing; }
 .stage-hint {
   position: absolute; left: 50%; bottom: 18px; z-index: 3; transform: translateX(-50%); white-space: nowrap; pointer-events: none;

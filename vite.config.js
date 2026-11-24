@@ -16,7 +16,6 @@ export default defineConfig({
             // Keep the big libraries in their own files so they cache and load separately.
             manualChunks(id) {
               if (id.includes('node_modules/three')) return 'three';
-              if (id.includes('node_modules/tone') || id.includes('standardized-audio-context')) return 'tone';
               if (id.includes('node_modules/gsap')) return 'gsap';
             },
           },

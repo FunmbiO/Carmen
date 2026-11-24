@@ -1,5 +1,4 @@
 import { SONGS, embedUrl } from '../pages/songs.js';
-import { Sound } from '../audio/engine.js';
 import { loadSpotifyApi } from './spotify-api.js';
 
 // Each page's song starts when she opens the page and pauses when she leaves.
@@ -45,7 +44,6 @@ async function create(card, key) {
         entry.started = true;
         clearTimeout(entry.timer);
         setHint(card, false);
-        Sound.stop(); // the ambient music steps aside for the real song
       }
     });
   });
@@ -89,9 +87,3 @@ export function deactivateSong(root) {
   }
 }
 
-// Turning the ambient music on pauses whichever song is playing.
-Sound.onChange((on) => {
-  if (!on || !current) return;
-  const entry = players.get(current);
-  if (entry && entry.controller) entry.controller.pause();
-});

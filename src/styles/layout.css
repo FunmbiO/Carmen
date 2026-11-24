@@ -25,19 +25,6 @@
 .brand { font: 500 10.5px var(--mono); letter-spacing: 0.3em; text-transform: uppercase; color: var(--mute); }
 .tools { display: flex; align-items: center; gap: 14px; }
 
-.snd {
-  display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
-  font: 500 10.5px var(--mono); letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--mute); background: transparent; border: 1px solid var(--line); border-radius: 0; padding: 8px 12px;
-  transition: border-color 0.3s, color 0.3s;
-}
-.snd[aria-pressed='true'] { border-color: var(--accent); color: var(--accent); }
-.eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
-.eq i { display: block; width: 2px; height: 4px; background: var(--dim); }
-.snd[aria-pressed='true'] .eq i { background: var(--accent); animation: eq 0.9s ease-in-out infinite; }
-.snd[aria-pressed='true'] .eq i:nth-child(2) { animation-delay: 0.2s; }
-.snd[aria-pressed='true'] .eq i:nth-child(3) { animation-delay: 0.4s; }
-@keyframes eq { 0%, 100% { height: 4px; } 50% { height: 12px; } }
 
 .views { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
 .view {
@@ -70,7 +57,7 @@
 .dock a[aria-current='page'] { color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .dock a[aria-current='page']::after { content: ''; position: absolute; left: 14%; right: 14%; top: 0; height: 2px; background: var(--accent); }
 
-@media (max-width: 480px) { .brand { display: none; } .snd #sndLabel { display: none; } }
+@media (max-width: 480px) { .brand { display: none; } }
 
 .route-line { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--foil); opacity: 0; transform: scaleX(0); pointer-events: none; }
 

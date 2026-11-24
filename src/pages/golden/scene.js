@@ -1,5 +1,4 @@
 import { drawFlies, makeFlies } from '../../lib/ambience.js';
-import { Sound } from '../../audio/engine.js';
 import { watchVisible } from '../../lib/visible.js';
 import { REDUCE, TAU, clamp, rnd, fit, $ } from '../../lib/util.js';
 import { SKY, STAGES } from './data.js';
@@ -35,7 +34,6 @@ export function createGolden(cv) {
       $('gWord').textContent = STAGES[idx].w;
       $('gLine').textContent = STAGES[idx].l;
     }
-    if (S.active) Sound.setTone(1 - S.t * 0.8);
   }
 
   function resize() {
@@ -116,8 +114,8 @@ export function createGolden(cv) {
   setT(0.22);
 
   return {
-    enter() { S.active = true; resize(); Sound.setTone(1 - S.t * 0.8); },
-    leave() { S.active = false; Sound.setTone(1); },
+    enter() { S.active = true; resize(); },
+    leave() { S.active = false; },
     resize,
     draw,
     visible: watchVisible(cv),

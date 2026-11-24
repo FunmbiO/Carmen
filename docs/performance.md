@@ -13,7 +13,7 @@ What keeps the site smooth, especially on phones, and how to check it.
 | Touch screens | No blend-mode grain layer, no live backdrop blur on the bars, and no smooth-scroll engine. | Blend modes and blur over an animated canvas force the GPU to re-composite every frame. |
 | Dust | Fewer particles, lower frame cap, and it rests (fades out and pauses) while the 3D bouquet is open. | The GPU is busiest there. |
 | Music players | The four YouTube players are built one after another, the opening song and first page first. | Four players loading at once is a spike that makes a phone stutter. |
-| Loading | Three.js, Tone.js and GSAP are separate chunks; the intro and the bouquet load on demand; the connection to YouTube is warmed up early. | A smaller first load. |
+| Loading | Three.js and GSAP are separate chunks; the intro and the bouquet load on demand; the connection to YouTube is warmed up early. | A smaller first load. |
 
 ## Checks
 

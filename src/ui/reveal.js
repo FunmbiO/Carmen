@@ -1,41 +1,50 @@
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import { REDUCE } from '../lib/util.js';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
-
-const SCROLLER = '#views';
+// Text and blocks rise into view the first time they scroll on screen. Plain CSS does the motion.
 const done = new WeakSet();
+let io = null;
+const pending = new Set();
+let sweeping = false;
 
-/** Lines of text rise out of a mask as they scroll into view. */
-export async function revealLines(els) {
-  if (REDUCE) return;
-  try { await document.fonts.ready; } catch { /* fonts API missing */ }
+function show(el) {
+  el.classList.add('is-in');
+  pending.delete(el);
+  if (io) io.unobserve(el);
+}
+
+// A quick jump down the page skips straight past some blocks without them ever crossing the edge, so sweep for those on scroll.
+function sweep() {
+  sweeping = false;
+  const top = document.getElementById('views').getBoundingClientRect().top;
+  pending.forEach((el) => { if (el.getBoundingClientRect().bottom < top) show(el); });
+}
+
+function observer() {
+  if (io) return io;
+  io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      show(e.target);
+    });
+  }, { root: document.getElementById('views'), rootMargin: '0px 0px -10% 0px' });
+  document.getElementById('views').addEventListener('scroll', () => {
+    if (!pending.size || sweeping) return;
+    sweeping = true;
+    requestAnimationFrame(sweep);
+  }, { passive: true });
+  return io;
+}
+
+function reveal(els, kind) {
+  if (REDUCE || !('IntersectionObserver' in window)) return;
   els.forEach((el) => {
     if (done.has(el)) return;
     done.add(el);
-    const split = SplitText.create(el, { type: 'lines', mask: 'lines' });
-    gsap.from(split.lines, {
-      yPercent: 105, duration: 1.1, stagger: 0.12, ease: 'power3.out',
-      scrollTrigger: { trigger: el, scroller: SCROLLER, start: 'top 88%', once: true },
-    });
+    el.classList.add('rv', kind);
+    pending.add(el);
+    observer().observe(el);
   });
-  ScrollTrigger.refresh();
 }
 
-/** Blocks fade up as they scroll into view. */
-export function revealBlocks(els) {
-  if (REDUCE) return;
-  els.forEach((el) => {
-    if (done.has(el)) return;
-    done.add(el);
-    gsap.from(el, {
-      opacity: 0, y: 24, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: el, scroller: SCROLLER, start: 'top 90%', once: true },
-    });
-  });
-  ScrollTrigger.refresh();
-}
-
-export { ScrollTrigger };
+export const revealLines = (els) => reveal(els, 'rv-lines');
+export const revealBlocks = (els) => reveal(els, 'rv-block');

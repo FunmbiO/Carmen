@@ -22,7 +22,7 @@ Add `?intro=0` to the address, or open a page directly such as `#bouquet`, to sk
 | Opening screen (Three.js particles, GSAP timeline) | `src/intro/` |
 | The four pages | `src/pages/` |
 | Flower, stem and ambience drawing | `src/lib/` |
-| Music (Tone.js) | `src/audio/` |
+| Music (YouTube players behind a vinyl card) | `src/ui/music.js` |
 | Router, dock, scroll, cursor, effects | `src/ui/` |
 | Themes and styles | `src/lib/theme.js`, `src/styles/` |
 

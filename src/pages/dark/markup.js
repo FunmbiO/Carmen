@@ -8,8 +8,10 @@ export const darkMarkup = `
   </div>
   <article class="letter panel chamfer" aria-label="A letter for Carmen">
     <p class="salute script foil">Carmen,</p>
-    <p class="reveal-lines">We don't know each other well yet, and I know you're not looking for anything right now. But some people leave an impression before they say a word, and you did. You come across as luxury, class and love in one place. You remind me of gold, honey, earth and sunset, so that's what I built.</p>
-    <p class="reveal-lines">I think you're a sweet goddess, a pearl. I'm not asking for anything today. If someday you feel like giving me a chance to know you, I'd be honored.</p>
+    <p class="reveal-lines">We don't know each other well/at all, and I know you're not looking for anything right now (Heard). There’s also so much I can do and say online before it’s straight up weird and parasocial.</p>
+    <p class="reveal-lines">That being said, take this whole thing with a grain of salt. I do think you're genuinely a ray of sunshine and I feel honoured that I’m even given the time of day to pull this stunt, lmao. However this isn’t me hitting on you at all, I just turned how I felt into a fun project.</p>
+    <p class="reveal-lines">Anyhow, I’m not on any weird typa timing. After this I won’t move any differently than before. Pinky promise.</p>
+    <p class="reveal-lines letter-close">Hope to meet you some day.</p>
     <div class="sig"><span class="signame script">Funmbi</span><span class="seal script" aria-hidden="true">F</span></div>
   </article>
   <div class="ask panel chamfer">

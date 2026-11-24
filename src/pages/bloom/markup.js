@@ -9,7 +9,7 @@ export const bloomMarkup = `
     <p class="bouquet-note">I'm not gonna pretend as if I know that you like flowers. However, even if you did, it would be weirder to send some to you. So here's a digital bouquet I made by hand, and you can interact with it.</p>
   </div>
   <div class="stage frame stage-3d">
-    <canvas id="cv-bloom" tabindex="0" role="img" aria-label="A bouquet of roses, daisies and tulips in kraft paper with a gold ribbon. Drag to turn it, tap a flower, and use the arrow keys to rotate."></canvas>
+    <canvas id="cv-bloom" class="touch-surface" tabindex="0" role="img" aria-label="A bouquet of roses, daisies and tulips in kraft paper with a gold ribbon. Drag to turn it, tap a flower, and use the arrow keys to rotate."></canvas>
     <p class="stage-hint" id="bouquetHint">Drag to turn it &middot; Tap a flower</p>
     <p class="stage-fallback" id="bouquetFallback" hidden>Your browser can't draw the 3D bouquet. The rest of the page still works.</p>
   </div>

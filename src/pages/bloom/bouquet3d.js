@@ -185,7 +185,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
   controls.maxPolarAngle = 1.7;
   controls.autoRotate = !REDUCE;
   controls.autoRotateSpeed = 0.9;
-  canvas.style.touchAction = 'pan-y'; // vertical swipes scroll the page, horizontal swipes turn the bouquet
+  canvas.style.touchAction = 'none'; // a drag on the bouquet turns it and never scrolls the page
   let resumeTimer = 0;
   controls.addEventListener('start', () => { controls.autoRotate = false; clearTimeout(resumeTimer); if (onInteract) onInteract(); });
   controls.addEventListener('end', () => { clearTimeout(resumeTimer); if (!REDUCE) resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 3500); });

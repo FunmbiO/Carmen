@@ -26,3 +26,7 @@ All fonts are self-hosted through Fontsource.
 ## Shape language
 
 Square corners by default. Feature panels use a chamfered corner (`.chamfer`). Canvases get a double hairline frame (`.frame`). The bouquet window is the one arch. Round shapes are kept for dots and the wax seal.
+
+## Touch surfaces
+
+The 3D bouquet, the sunset scene and its slider carry the `touch-surface` class (`page-common.css`). It sets `touch-action: none`, so a finger drag that starts on one belongs to it and never scrolls the page, and it stops text selection and the long-press menu. The page margins and the text around them stay free for scrolling. `dev/touch-surfaces.cjs` checks this with real touch events.

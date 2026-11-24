@@ -18,6 +18,7 @@ export const darkMarkup = `
     <div class="sig"><span class="signame script">Funmbi</span><span class="seal script" aria-hidden="true">F</span></div>
   </article>
   <div class="ask panel chamfer" role="group" aria-label="Your reply">
+    <h3 class="verdict foil">What’s the verdict?</h3>
     <div class="replies">${replyButtons}</div>
     <p class="answer" id="answer" aria-live="polite">&nbsp;</p>
   </div>

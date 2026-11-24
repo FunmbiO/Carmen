@@ -50,6 +50,7 @@
 .sound-hint[hidden] { display: none; }
 
 /* Bloom: the 3D bouquet */
+.page-head .bouquet-note + .bouquet-note { margin-top: -2px; }
 .bouquet-note {
   max-width: 34em; padding-left: 18px; border-left: 2px solid var(--accent);
   font: italic 500 clamp(18px, 4.4vw, 23px)/1.5 var(--display); color: var(--ink);

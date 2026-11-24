@@ -17,7 +17,7 @@ export const CINEMA = {
 };
 
 export function createCinema({ camera, controls, target, getDist, hooks = {} }) {
-  const state = { on: false, t: 0, barsFired: false };
+  const state = { on: false, t: 0 };
 
   function place(az, pol, r, ty) {
     target.set(0, ty, 0);
@@ -35,7 +35,6 @@ export function createCinema({ camera, controls, target, getDist, hooks = {} }) 
   function start() {
     state.on = true;
     state.t = 0;
-    state.barsFired = false;
     controls.enabled = false;
     controls.autoRotate = false;
     if (hooks.start) hooks.start();
@@ -58,7 +57,6 @@ export function createCinema({ camera, controls, target, getDist, hooks = {} }) 
     place(lerp(CINEMA.AZ0, CINEMA.AZ1, e), lerp(CINEMA.POL0, CINEMA.POL1, e), lerp(CINEMA.R0, getDist(), e), lerp(CINEMA.TY0, CINEMA.TY1, e));
     camera.fov = lerp(CINEMA.FOV0, CINEMA.FOV1, e);
     camera.updateProjectionMatrix();
-    if (state.t > 3.5 && !state.barsFired) { state.barsFired = true; if (hooks.bars) hooks.bars(); }
     if (p >= 1) finish();
     return true;
   }

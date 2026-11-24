@@ -8,7 +8,7 @@ import { petalGeometry } from './flowers3d.js';
 
 export const PAPER_TOP = 0.05;
 export const PAPER_BOTTOM = -1.3;
-const R_TOP = 0.88;
+const R_TOP = 1.0;
 const R_BOTTOM = 0.12;
 
 export function coneRadiusAt(y) {

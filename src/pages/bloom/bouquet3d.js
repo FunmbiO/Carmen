@@ -7,7 +7,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { palette, onTheme } from '../../lib/theme.js';
 import { REDUCE, clamp } from '../../lib/util.js';
-import { COLOR_ORDER, vivid, hsl } from './colors3d.js';
+import { vivid, hsl } from './colors3d.js';
+import { START_FLOWERS, MAX_FLOWERS, specAt, hydrangeaSlots } from './plan3d.js';
+import { planLayout, placeNew, outward } from './layout3d.js';
 import { buildRose, buildPeony, buildTulip, buildDaisy, buildSunflower, flowerMaterial, tintFlower } from './flowers3d.js';
 import { buildLavender, buildHydrangea, buildGreens, budMaterial } from './fillers3d.js';
 import { buildWrap } from './wrap3d.js';
@@ -18,34 +20,15 @@ import { createCinema, CINEMA } from './cinema3d.js';
 // baby's breath and eucalyptus, in coloured paper and a satin bow. Drag to turn it, tap a flower, add more.
 
 const UP = new Vector3(0, 1, 0);
-const GOLDEN = 2.39996323;
 const GATHER = new Vector3(0, -0.7, 0); // where every stem meets, inside the paper
-export const START_FLOWERS = 26;
-export const MAX_FLOWERS = 44;
+export { START_FLOWERS, MAX_FLOWERS };
 
-const TYPES = ['rose', 'peony', 'daisy', 'tulip', 'rose', 'sunflower', 'peony', 'daisy', 'rose', 'tulip'];
-const SIZE = { rose: 1.18, peony: 1.5, daisy: 1.05, tulip: 1.05, sunflower: 1.35 };
 const BUILD = { rose: buildRose, peony: buildPeony, daisy: buildDaisy, tulip: buildTulip, sunflower: buildSunflower };
 const PAPER = { noir: '#127a55', terra: '#d8643a', ivory: '#f7ecd9' }; // the wrapping follows the theme, the flowers do not
 
 const easeOutBack = (t) => { const c = 1.5; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 const rnd = (a, b) => a + Math.random() * (b - a);
-
-function specAt(i) {
-  const type = i === 0 ? 'peony' : TYPES[(i * 3 + Math.floor(i / 4)) % TYPES.length];
-  let color = COLOR_ORDER[(i * 7) % COLOR_ORDER.length];
-  if (i === 0) color = 'blush';
-  if (type === 'sunflower') color = 'sun';
-  const size = SIZE[type] * (i === 0 ? 1.2 : 1) * (0.94 + ((i * 37) % 12) / 100);
-  return { type, color, size };
-}
-
-function slotFor(i) {
-  if (i === 0) return new Vector3(0, 1.0, 0);
-  const r = 0.2 * Math.sqrt(i), a = i * GOLDEN;
-  return new Vector3(r * Math.cos(a), 0.94 - 0.5 * Math.pow(r / 1.2, 2) + rnd(-0.03, 0.03), r * Math.sin(a));
-}
 
 export function createBouquet3D(canvas, { onCount } = {}) {
   const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
@@ -105,7 +88,18 @@ export function createBouquet3D(canvas, { onCount } = {}) {
   const fillers = []; // lavender and hydrangea
   const hitMat = new MeshBasicMaterial({ visible: false });
 
-  function makeBranch(builder, mat, size, slot, delay, isFlower) {
+  // The layout decides where every head goes, so neighbours have room and petals do not pierce each other.
+  const placed = []; // { p: [x, y, z], r } for everything placed so far, so later heads can find free room
+  const hydSlots = hydrangeaSlots();
+  const layout = planLayout(
+    Array.from({ length: START_FLOWERS }, (_, i) => ({ reach: specAt(i).reach }))
+      .concat(hydSlots.map((p) => ({ reach: 0.3, fixed: p }))),
+  );
+  const shrink = layout.scale; // how much the layout had to shrink the flowers to fit
+  layout.positions.forEach((p, i) => placed.push({ p, r: layout.radii[i] }));
+
+  /** A stem from the gather point to a head. faceOut: 1 turns the head to face away from the dome, 0 follows the stem. */
+  function makeBranch(builder, mat, size, slot, delay, isFlower, faceOut) {
     const H = slot.clone().sub(GATHER);
     const curve = new CatmullRomCurve3([new Vector3(0, 0, 0), new Vector3(H.x * 0.3, H.y * 0.55, H.z * 0.3), H]);
     const branch = new Group();
@@ -113,7 +107,9 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     branch.add(new Mesh(new TubeGeometry(curve, 26, 0.016, 6, false), stemMat));
     const head = builder(mat);
     head.group.position.copy(H);
-    head.group.quaternion.setFromUnitVectors(UP, curve.getTangent(1).normalize());
+    const out = new Vector3(...outward([slot.x, slot.y, slot.z])).multiplyScalar(faceOut)
+      .addScaledVector(curve.getTangent(1).normalize(), 1 - faceOut).normalize();
+    head.group.quaternion.setFromUnitVectors(UP, out);
     head.group.scale.setScalar(size);
     let hit = null;
     if (isFlower) {
@@ -128,31 +124,37 @@ export function createBouquet3D(canvas, { onCount } = {}) {
 
   function addFlower(i, delay = 0) {
     const spec = specAt(i);
+    let p;
+    if (i < START_FLOWERS) p = layout.positions[i];
+    else { // an extra flower goes in the roomiest gap
+      const spot = placeNew(placed, spec.reach * shrink, { seed: i });
+      p = spot.p;
+      placed.push({ p, r: spot.r });
+    }
     const mat = flowerMaterial();
     tintFlower(mat, vivid(spec.color));
-    const b = makeBranch(BUILD[spec.type], mat, spec.size, slotFor(i), delay, true);
+    const b = makeBranch(BUILD[spec.type], mat, spec.size * shrink, new Vector3(...p), delay, true, 0.75);
     branches.push(b);
     if (onCount) onCount(branches.length);
     return b;
   }
 
-  function addFiller(kind, slot, colorHex, size, delay) {
-    const mat = kind === 'lavender' ? budMaterial() : budMaterial();
+  function addFiller(builder, p, colorHex, size, faceOut) {
+    const mat = budMaterial();
     mat.color = new Color(colorHex);
-    fillers.push(makeBranch(kind === 'lavender' ? buildLavender : buildHydrangea, mat, size, slot, delay, false));
+    fillers.push(makeBranch(builder, mat, size, new Vector3(...p), 0, false, faceOut));
   }
 
   for (let i = 0; i < START_FLOWERS; i++) addFlower(i, 0);
-  // Lavender stands taller than the flowers; hydrangea sits low around the rim.
+  // Hydrangea sits low around the rim, in the spots the flowers were laid out around.
+  const hyd = [hsl(225, 0.62, 0.7), hsl(330, 0.55, 0.78), hsl(215, 0.6, 0.62)];
+  hydSlots.forEach((p, i) => addFiller(buildHydrangea, p, hyd[i], 0.95, 0.9));
+  // Lavender stands tall, each spike in a gap near the top of the dome.
   const lav = [hsl(268, 0.62, 0.62), hsl(282, 0.7, 0.5), hsl(262, 0.55, 0.7)];
   for (let i = 0; i < 8; i++) {
-    const a = (i / 8) * Math.PI * 2 + 0.3, r = rnd(0.5, 1.0);
-    addFiller('lavender', new Vector3(Math.cos(a) * r, rnd(1.05, 1.3), Math.sin(a) * r), lav[i % 3], rnd(0.95, 1.2), 0);
-  }
-  const hyd = [hsl(225, 0.62, 0.7), hsl(330, 0.55, 0.78), hsl(215, 0.6, 0.62)];
-  for (let i = 0; i < 3; i++) {
-    const a = (i / 3) * Math.PI * 2 + 0.9;
-    addFiller('hydrangea', new Vector3(Math.cos(a) * 0.92, 0.38, Math.sin(a) * 0.92), hyd[i], 1.0, 0);
+    const spot = placeNew(placed, 0.12, { thMin: 0.25, thMax: 1.0, hMin: 0.35, hMax: 0.8, seed: 100 + i });
+    placed.push({ p: spot.p, r: spot.r });
+    addFiller(buildLavender, spot.p, lav[i % 3], rnd(0.95, 1.15), 0.2);
   }
 
   function applyTheme() {
@@ -237,7 +239,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     canvas.style.height = h + 'px';
     camera.aspect = w / h;
     const half = Math.tan((CINEMA.FOV1 * Math.PI) / 360);
-    dist = Math.max(3.35 / (2 * half * Math.min(1, camera.aspect)), 3.95 / (2 * half));
+    dist = Math.max(3.9 / (2 * half * Math.min(1, camera.aspect)), 3.9 / (2 * half));
     if (!cinema.active) {
       // Keep her current turn, just refit the distance.
       const dir = camera.position.clone().sub(controls.target);
@@ -335,6 +337,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
   return {
     draw, resize, replay, addFlower: addMore, scatter, snapshot,
     count: () => branches.length,
+    max: MAX_FLOWERS,
     onInteract(fn) { onInteract = fn; },
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles }),
     /** hooks: { start, bars, end } fire during the opening shot. */

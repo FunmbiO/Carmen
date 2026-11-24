@@ -21,11 +21,13 @@ export const darkMarkup = `
     <div class="replies">${replyButtons}</div>
     <p class="answer" id="answer" aria-live="polite">&nbsp;</p>
   </div>
-  ${codeBlock('chance.js', 'code-chance')}
+  ${codeBlock('promise.js', 'code-chance')}
   ${soundCard('dark')}
   <div class="row"><a class="btn" href="#bloom">Back to the flower</a></div>
 `;
 
 export const chanceCode = `<span class="k">if</span> (you.<span class="f">feelsLikeIt</span>()) {
-  chance.<span class="f">give</span>(funmbi);
-} <span class="c">// no pressure</span>`;
+  hello.<span class="f">say</span>();
+} <span class="k">else</span> {
+  nothing.<span class="f">changes</span>(); <span class="c">// pinky promise</span>
+}`;

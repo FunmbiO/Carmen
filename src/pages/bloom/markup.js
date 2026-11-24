@@ -25,9 +25,9 @@ export const bloomMarkup = `
   </div>
   <span class="hint" id="bouquetCount" aria-live="polite">26 flowers</span>
   <div class="bouquet-notes">
-    <p class="bouquet-note">I want to preface this by saying, i dont want to be that man thats ruining your peace.</p>
-    <p class="bouquet-note">I remeber your words exactly; “Imma be real im not trynna be anything other than friends w nb rn”. So this isn’t me pushing it. Promise.</p>
-    <p class="bouquet-note">Keeping it P, im not sure if you like flowers. If anything this seems very cliche and generic. However, i thought to give it a lil twist, so here's a digital bouquet I made by hand, and you can interact with it.</p>
+    <p class="bouquet-note">I want to preface this by saying, I don’t want to be that man that’s ruining your peace.</p>
+    <p class="bouquet-note">I remember your words exactly; “Imma be real im not trynna be anything other than friends w nb rn”. So this isn’t me pushing it. Promise.</p>
+    <p class="bouquet-note">Keeping it P, I’m not sure if you like flowers. If anything this seems very cliché and generic. However, I thought to give it a lil twist, so here’s a digital bouquet I made by hand, and you can interact with it.</p>
   </div>
   <div class="orn" aria-hidden="true"><i></i></div>
   <figure class="code panel">

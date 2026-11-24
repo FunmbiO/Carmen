@@ -18,7 +18,7 @@ export const bouquetMarkup = `
   </div>
   <div class="prog"><span id="qProg">0 of 7 found</span><div class="bar"><i id="qBar"></i></div></div>
   <div class="done panel chamfer" id="qDone" hidden>
-    <p class="foil">That's the whole bouquet.</p>
+    <p class="foil">That’s the whole bouquet.</p>
     <a class="btn primary" href="#golden-hour">Continue</a>
   </div>
   ${soundCard('bouquet')}

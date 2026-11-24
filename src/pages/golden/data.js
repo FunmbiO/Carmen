@@ -7,10 +7,10 @@ export const SKY = [
 ];
 
 export const STAGES = [
-  { max: 0.25, w: 'Gold.', l: 'The first thing I think of when I think of you.' },
-  { max: 0.5, w: 'Honey.', l: 'Slow, sweet, and worth taking your time over.' },
-  { max: 0.75, w: 'Sunset.', l: 'The part of the day when everything softens.' },
-  { max: 1.01, w: 'Night.', l: "And you're still the brightest thing in it." },
+  { max: 0.25, w: 'Gold.', l: 'The first thing I think of when I see you: you’re very classy and luxurious.' },
+  { max: 0.5, w: 'Honey.', l: 'Sweet and worth savouring.' },
+  { max: 0.75, w: 'Sunset.', l: 'You compete with golden hour when it comes to that beauty glow.' },
+  { max: 1.01, w: 'Night.', l: 'Just like the stars at night, you shine with beauty.' },
 ];
 
 export const SUN_CODE = `sun.<span class="f">set</span>(time);

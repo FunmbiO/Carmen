@@ -5,7 +5,7 @@ export const SONGS = {
   bloom: { title: 'Like a Tattoo', by: 'Sade', note: 'quiet storm', kind: 'track', id: '4PEGwWH4tL6H7dGl4uVSPg', yt: ['oP4sBeV7llE', 'Eg6fL6cAgT4', 'mVDQ-_PfFX8'] },
   bouquet: { title: 'Stranger', by: 'Jhené Aiko', note: 'dreamy, weightless', kind: 'track', id: '6lIF4MhtWaFVDJNhfd3hMv', yt: ['5rRjYt3iVfM', 'x9sq06NTSXU', 'jpt870c1UXY'] },
   golden: { title: 'Solo', by: 'Future', note: 'the night settles in', kind: 'track', id: '4lH6nENd1y81jp7Yt9lTBX', yt: ['X2DTROC4JCI', 'xC0pF72qmIw', '3QjSkB-ZJKQ'] },
-  dark: { title: 'Whatever She Wants', by: 'Bryson Tiller', note: 'late night', kind: 'album', id: '60s0PMYFJhe34io9HuyUXf', yt: ['2MeftqZ_quo', 'ThEqGuYXl48', 'fTRiH8SQxKs'] },
+  dark: { title: 'Stay Ready', by: 'Jhené Aiko', note: 'with Kendrick Lamar', kind: 'track', id: '5nkUIVKqOqdpB6ApKgEMkv', yt: ['l6zyxURZkqo', 'k29ONqJBxdM', 'Dv7OVwv46YY', '8JOkWHWKX_4'] },
 };
 
 export const spotifyUrl = (s) => `https://open.spotify.com/${s.kind}/${s.id}`;

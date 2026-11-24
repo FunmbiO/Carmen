@@ -27,4 +27,5 @@ Each page plays the real track in a YouTube player (ids in `src/pages/songs.js`)
 - Sade, "Like a Tattoo"
 - Jhené Aiko, "Stranger"
 - Future, "Solo"
-- Bryson Tiller, "Whatever She Wants"
+- Jhené Aiko, "Stay Ready" (with Kendrick Lamar)
+- Bryson Tiller, "Whatever She Wants" (under the opening)

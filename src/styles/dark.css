@@ -40,4 +40,3 @@
 
 .ask .verdict { font: italic 500 clamp(30px, 8vw, 42px)/1.12 var(--display); padding-bottom: 0.08em; }
 
-.ask .verdict-note { font: 400 11px var(--mono); letter-spacing: 0.1em; color: var(--dim); }

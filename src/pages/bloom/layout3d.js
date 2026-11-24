@@ -6,7 +6,7 @@
 // layout is run again.
 
 export const DOME = { cx: 0, cy: -0.2, cz: 0, R0: 1.22, HMAX: 0.45, THMAX: 1.2 };
-export const COLLIDE = 0.66; // the fraction of a head's reach that counts as solid; the petal tips may overlap a little
+export const COLLIDE = 0.9; // the fraction of a head's reach that counts as solid; only the very tips of petals may meet
 const GOLDEN = 2.39996323;
 
 function rng(seed) {
@@ -61,7 +61,7 @@ function worstOverlap(pos, rad) {
  * items: [{ reach, fixed?: [x,y,z] }]. The first item is the centrepiece and is fixed at the top of the dome.
  * Returns { positions, scale, overlap } where scale is how much every free flower had to shrink.
  */
-export function planLayout(items, { seed = 7, maxOverlap = 0.14 } = {}) {
+export function planLayout(items, { seed = 7, maxOverlap = 0.1 } = {}) {
   const N = items.length;
   const top = [DOME.cx, DOME.cy + DOME.R0 + DOME.HMAX * 0.45, DOME.cz];
   let scale = 1;

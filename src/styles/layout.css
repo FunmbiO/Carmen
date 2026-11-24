@@ -42,7 +42,7 @@
 .views { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
 .view {
   max-width: 800px; margin: 0 auto;
-  padding: 34px max(18px, env(safe-area-inset-left, 0px)) 150px max(18px, env(safe-area-inset-right, 0px));
+  padding: 34px max(18px, env(safe-area-inset-left, 0px)) 44px max(18px, env(safe-area-inset-right, 0px));
   display: flex; flex-direction: column; gap: 28px;
 }
 /* Pages that are not open stay rendered but out of sight, so their music players keep working. */

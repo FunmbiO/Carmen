@@ -8,9 +8,12 @@ export const bloomMarkup = `
     <p class="bouquet-note">Imma preface this by saying I remember what you said. “Imma be real im not trynna be anything other than friends w nb rn” so this isn’t me pushing it. Promise.</p>
     <p class="bouquet-note">Also, im not gonna pretend as if I know for a fact you like flowers. If anything this seems very cliche and generic. However, even if you did, it would be weirder to send some to you irl. So here's a digital bouquet I made by hand, and you can interact with it.</p>
   </div>
-  <div class="stage frame stage-3d">
+  <div class="stage frame stage-3d" id="stage3d">
     <canvas id="cv-bloom" class="touch-surface" tabindex="0" role="img" aria-label="A bouquet of roses, daisies and tulips in kraft paper with a gold ribbon. Drag to turn it, tap a flower, and use the arrow keys to rotate."></canvas>
-    <p class="stage-hint" id="bouquetHint">Drag to turn it &middot; Tap a flower</p>
+    <span class="cine-bar cine-top" aria-hidden="true"></span><span class="cine-bar cine-bottom" aria-hidden="true"></span>
+    <p class="cine-title script" aria-hidden="true">For Carmen</p>
+    <p class="cine-skip" aria-hidden="true">Tap to skip</p>
+    <p class="stage-hint gone" id="bouquetHint">Drag to turn it &middot; Tap a flower</p>
     <p class="stage-fallback" id="bouquetFallback" hidden>Your browser can't draw the 3D bouquet. The rest of the page still works.</p>
   </div>
   <div class="row bouquet-tools">
@@ -19,7 +22,7 @@ export const bloomMarkup = `
     <button id="scatter" class="btn" type="button">Let the petals go</button>
     <button id="snap" class="btn" type="button">Save a snapshot</button>
   </div>
-  <span class="hint" id="bouquetCount" aria-live="polite">9 flowers</span>
+  <span class="hint" id="bouquetCount" aria-live="polite">26 flowers</span>
   <div class="orn" aria-hidden="true"><i></i></div>
   <figure class="code panel">
     <figcaption><span>bouquet.js</span><span>◆</span></figcaption>

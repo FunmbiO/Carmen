@@ -29,6 +29,8 @@
   --glass: rgba(10, 14, 12, 0.72);
   --foil: linear-gradient(120deg, #fff0b8 0%, #f2c75c 26%, #b9801f 48%, #f6d982 70%, #fff0b8 100%);
   --stage: #0b140f;
+  --cine-deep: #040a07;
+  --cine-glow: #14402e;
   color-scheme: dark;
 }
 
@@ -51,6 +53,8 @@
   --glass: rgba(28, 17, 11, 0.74);
   --foil: linear-gradient(120deg, #ffd98a 0%, #e9a93b 28%, #b5532e 52%, #f0b955 72%, #ffd98a 100%);
   --stage: #1a0f09;
+  --cine-deep: #120a05;
+  --cine-glow: #4d2711;
   color-scheme: dark;
 }
 
@@ -73,5 +77,7 @@
   --glass: rgba(246, 239, 227, 0.8);
   --foil: linear-gradient(120deg, #7b1f33 0%, #5a1624 30%, #b08d3e 52%, #7b1f33 74%, #5a1624 100%);
   --stage: #f1e6d2;
+  --cine-deep: #1a0911;
+  --cine-glow: #561a30;
   color-scheme: light;
 }

@@ -90,5 +90,31 @@ export function createEffects(scene) {
     }
   }
 
-  return { burst, scatter, update };
+  // A slow drift of glowing motes around the bouquet, brighter during the opening.
+  const MOTES = 110;
+  const mp = new Float32Array(MOTES * 3), mv = [];
+  for (let i = 0; i < MOTES; i++) {
+    const a = Math.random() * Math.PI * 2, r = 0.3 + Math.random() * 1.5;
+    mp[i * 3] = Math.cos(a) * r; mp[i * 3 + 1] = -1 + Math.random() * 3.6; mp[i * 3 + 2] = Math.sin(a) * r;
+    mv.push(0.06 + Math.random() * 0.16);
+  }
+  const mg = new BufferGeometry();
+  mg.setAttribute('position', new Float32BufferAttribute(mp, 3));
+  const motesMat = new PointsMaterial({ size: 0.075, map: tex, color: new Color('#ffe9b0'), transparent: true, depthWrite: false, blending: AdditiveBlending, opacity: 0.8 });
+  const motes = new Points(mg, motesMat);
+  scene.add(motes);
+  function driftMotes(dt, strength, color, light) {
+    const p = mg.attributes.position;
+    for (let i = 0; i < MOTES; i++) {
+      let y = p.getY(i) + mv[i] * dt;
+      if (y > 2.6) y = -1;
+      p.setY(i, y);
+    }
+    p.needsUpdate = true;
+    motesMat.opacity = 0.85 * strength;
+    motesMat.blending = light ? NormalBlending : AdditiveBlending;
+    if (color) motesMat.color.set(color);
+  }
+
+  return { burst, scatter, update, driftMotes };
 }

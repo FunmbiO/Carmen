@@ -1,6 +1,6 @@
 import {
   Group, Mesh, CylinderGeometry, MeshStandardMaterial, BackSide, FrontSide, Float32BufferAttribute,
-  TorusGeometry, SphereGeometry, Color,
+  TorusGeometry, SphereGeometry, Color, MeshPhysicalMaterial,
 } from 'three';
 import { petalGeometry } from './flowers3d.js';
 
@@ -45,14 +45,15 @@ function paperGeometry() {
 export function buildWrap() {
   const group = new Group();
   const geo = paperGeometry();
-  const outer = new Mesh(geo, new MeshStandardMaterial({ color: '#b98b5e', vertexColors: true, roughness: 0.92, side: FrontSide }));
+  const paperMat = new MeshStandardMaterial({ color: '#b98b5e', vertexColors: true, roughness: 0.85, side: FrontSide });
+  const outer = new Mesh(geo, paperMat);
   const lining = new Mesh(geo, new MeshStandardMaterial({ color: '#f1e5cc', roughness: 0.9, side: BackSide }));
   group.add(outer, lining);
 
   // Ribbon around the paper, with the bow at the front.
-  const ribbonMat = new MeshStandardMaterial({ color: '#ffd86b', roughness: 0.28, metalness: 0.65 });
+  const ribbonMat = new MeshPhysicalMaterial({ color: '#ffd86b', roughness: 0.3, metalness: 0.55, sheen: 1, sheenRoughness: 0.35, sheenColor: new Color('#ffffff') });
   const ry = -0.66;
-  const ring = new Mesh(new TorusGeometry(coneRadiusAt(ry) + 0.018, 0.03, 10, 64), ribbonMat);
+  const ring = new Mesh(new TorusGeometry(coneRadiusAt(ry) + 0.018, 0.042, 12, 64), ribbonMat);
   ring.rotation.x = Math.PI / 2;
   ring.position.y = ry;
   group.add(ring);
@@ -60,18 +61,18 @@ export function buildWrap() {
   const bow = new Group();
   bow.position.set(0, ry, coneRadiusAt(ry) + 0.05);
   [-1, 1].forEach((d) => {
-    const loop = new Mesh(new TorusGeometry(0.13, 0.028, 10, 36), ribbonMat);
+    const loop = new Mesh(new TorusGeometry(0.17, 0.038, 12, 40), ribbonMat);
     loop.scale.set(0.85, 1.35, 0.7);
-    loop.position.set(d * 0.15, 0.03, 0);
+    loop.position.set(d * 0.2, 0.03, 0);
     loop.rotation.z = d * 0.5;
     loop.rotation.y = d * -0.25;
     bow.add(loop);
-    const tail = new Mesh(petalGeometry(0.5, 0.09, 0.2, 0.1, 10, 2), ribbonMat);
+    const tail = new Mesh(petalGeometry(0.62, 0.13, 0.2, 0.1, 10, 2), ribbonMat);
     tail.rotation.set(Math.PI - 0.12, 0, d * 0.28);
     tail.position.set(d * 0.05, -0.02, 0.02);
     bow.add(tail);
   });
-  const knot = new Mesh(new SphereGeometry(0.06, 16, 12), ribbonMat);
+  const knot = new Mesh(new SphereGeometry(0.085, 16, 12), ribbonMat);
   knot.scale.set(1.1, 0.9, 0.8);
   bow.add(knot);
   group.add(bow);
@@ -79,5 +80,6 @@ export function buildWrap() {
   return {
     group,
     setRibbonColor(c) { ribbonMat.color = new Color(c); },
+    setPaperColor(c) { paperMat.color = new Color(c); },
   };
 }

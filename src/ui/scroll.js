@@ -20,3 +20,17 @@ export function scrollTop() {
   if (lenis) lenis.scrollTo(0, { immediate: true });
   else document.getElementById('views').scrollTop = 0;
 }
+
+/** Smoothly scroll the page container to a position. */
+export function scrollToY(y) {
+  const views = document.getElementById('views');
+  if (lenis) lenis.scrollTo(y);
+  else views.scrollTo({ top: y, behavior: REDUCE ? 'auto' : 'smooth' });
+}
+
+/** Scroll so the bottom edge of an element sits just under the top bar. */
+export function scrollPast(el, gap = 14) {
+  const views = document.getElementById('views');
+  const y = views.scrollTop + el.getBoundingClientRect().bottom - views.getBoundingClientRect().top - gap;
+  scrollToY(Math.max(0, y));
+}

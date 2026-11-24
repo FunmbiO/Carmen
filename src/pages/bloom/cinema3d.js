@@ -11,8 +11,8 @@ export const CINEMA = {
   DUR: 4.8,
   AZ0: 1.35, AZ1: 0.12, // sideways angle: from the side to nearly head-on
   POL0: 2.0, POL1: 1.42, // looking up from below, then eye level
-  R0: 3.0, // starting distance; the end distance comes from the frame size
-  TY0: 0.95, TY1: 0.12, // what the camera looks at
+  R0: 3.7, // starting distance; the end distance comes from the frame size
+  TY0: 0.8, TY1: 0.12, // what the camera looks at
   FOV0: 24, FOV1: 35, // a slow zoom-out as it pulls back
 };
 

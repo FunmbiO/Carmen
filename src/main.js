@@ -12,7 +12,6 @@ import './styles/dark.css';
 import './styles/vinyl.css';
 import { initTheme } from './lib/theme.js';
 import { mountThemeSwitch } from './ui/theme-switch.js';
-import { mountDock } from './ui/dock.js';
 import { startRouter, onPage } from './ui/router.js';
 import { startScroll, scrollTop } from './ui/scroll.js';
 import { playPageTransition } from './ui/transition.js';
@@ -26,7 +25,6 @@ import { initMusic, releaseIntro } from './ui/music.js';
 
 initTheme();
 mountThemeSwitch(document.getElementById('theme-host'));
-mountDock();
 startScroll();
 mountDust().catch((err) => console.warn('The dust layer could not start', err));
 mountCursor();

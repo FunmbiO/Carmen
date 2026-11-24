@@ -32,7 +32,7 @@ export function petalGeometry(length, width, curl, cup = 0.5, segY = 8, segX = 6
     const u = (pos.getX(i) + 0.5) * 2 - 1; // -1..1 across
     const t = pos.getY(i) + 0.5; // 0..1 base to tip
     const tt = Math.pow(t, 0.8);
-    const half = Math.pow(Math.max(0, 1 - Math.pow(2 * tt - 1, 2)), 0.5); // narrow base, round tip
+    const half = Math.pow(Math.max(0, 1 - Math.pow(2 * tt - 1, 2)), 0.36); // narrow base, broad rounded tip
     const x = u * half * width * 0.5;
     const y = t * length;
     // Frilly edges: a wave that grows toward the rim and the tip.

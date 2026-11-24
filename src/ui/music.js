@@ -149,6 +149,11 @@ function create(card, YT) {
       fill: card.querySelector('.scrub-fill'), time: card.querySelector('.time'), scrub: card.querySelector('.scrub'),
     };
     players.set(key, entry);
+    bindControls(entry, {
+      onToggle: () => toggle(key),
+      onSeekTo: (f) => { if (wantsMusic(entry)) { const d = entry.player.getDuration(); if (d) entry.player.seekTo(f * d, true); } },
+      onSeekBy: (sec) => { if (wantsMusic(entry)) entry.player.seekTo(Math.max(0, entry.player.getCurrentTime() + sec), true); },
+    });
   }
   entry.ready = false;
   if (!YT || !target || !s.yt || !s.yt.length) { toSpotify(key); return; }
@@ -241,13 +246,12 @@ function resume() {
 export function initMusic() {
   loadYouTubeApi().then((YT) => {
     YTapi = YT;
-    document.querySelectorAll('.sound[data-song]').forEach((card) => create(card, YT));
-    players.forEach((entry, key) => {
-      bindControls(entry, {
-        onToggle: () => toggle(key),
-        onSeekTo: (f) => { if (wantsMusic(entry)) { const d = entry.player.getDuration(); if (d) entry.player.seekTo(f * d, true); } },
-        onSeekBy: (s) => { if (wantsMusic(entry)) entry.player.seekTo(Math.max(0, entry.player.getCurrentTime() + s), true); },
-      });
+    // Build the players one after another, not all at once: the opening song and the first page's song first,
+    // then the rest while she is still reading. Four players loading at once is a spike that makes a phone stutter.
+    const cards = new Map([...document.querySelectorAll('.sound[data-song]')].map((c) => [c.dataset.song, c]));
+    ['dark', 'bloom', 'bouquet', 'golden'].forEach((key, i) => {
+      const card = cards.get(key);
+      if (card) setTimeout(() => create(card, YT), i < 2 ? 0 : (i - 1) * 1800);
     });
     if (current) { const entry = players.get(current); if (entry && entry.ready) kick(current); } // asked for before the API loaded
     setInterval(tickProgress, 300);

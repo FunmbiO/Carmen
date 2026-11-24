@@ -33,7 +33,7 @@ mountDock();
 startScroll();
 mountSoundToggle();
 (window.requestIdleCallback || setTimeout)(() => Sound.preload());
-mountDust();
+mountDust().catch((err) => console.warn('The dust layer could not start', err));
 mountCursor();
 
 mountBloom();
@@ -54,9 +54,17 @@ onPage((name) => {
 const skipIntro = location.hash.length > 1 || new URLSearchParams(location.search).get('intro') === '0';
 (async () => {
   if (!skipIntro) {
-    // Three.js is only needed for the opening, so it loads on demand.
-    const { playIntro } = await import('./intro/intro.js');
-    await playIntro();
+    try {
+      // Three.js is only needed for the opening, so it loads on demand.
+      const { playIntro } = await import('./intro/intro.js');
+      await playIntro();
+    } catch (err) {
+      // No WebGL, or anything else going wrong, must never leave a blank page: skip the opening and go in.
+      console.error('The opening could not play, going straight in', err);
+      const intro = document.getElementById('intro');
+      intro.hidden = true;
+      intro.innerHTML = '';
+    }
   }
   startRouter();
 })();

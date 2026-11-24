@@ -32,3 +32,6 @@
 .reply.is-chosen { background: var(--foil); background-size: 200% 100%; color: var(--accent-ink); border-color: transparent; }
 .answer { font: italic 500 clamp(21px, 5vw, 25px)/1.35 var(--display); color: var(--accent); min-height: 34px; }
 @media (min-width: 560px) { .replies { grid-template-columns: 1fr 1fr; } .reply:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+
+/* The last line of the letter stands a little apart. */
+.letter .letter-close { margin-top: 4px; color: var(--accent); }

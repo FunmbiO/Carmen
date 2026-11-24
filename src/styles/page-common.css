@@ -103,3 +103,13 @@
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Scroll lanes: a strip down each side of a touch surface that scrolls the page when swiped, so a finger can
+   never get stuck inside the bouquet or the sunset. */
+.scroll-lane { position: absolute; top: 0; bottom: 0; z-index: 3; width: 36px; touch-action: pan-y; }
+.lane-l { left: 0; }
+.lane-r { right: 0; }
+@media (pointer: coarse) {
+  .lane-l { background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent); }
+  .lane-r { background: linear-gradient(270deg, rgba(255, 255, 255, 0.06), transparent); }
+}

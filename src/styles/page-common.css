@@ -70,13 +70,7 @@
 }
 .stage-hint.gone { opacity: 0; }
 
-/* The opening shot: letterbox bars slide in, a title card fades through, the bars slide away. */
-.cine-bar { position: absolute; left: 0; right: 0; height: 12%; z-index: 4; background: #000; pointer-events: none; transition: transform 0.7s var(--ease); }
-.cine-top { top: 0; transform: translateY(-101%); }
-.cine-bottom { bottom: 0; transform: translateY(101%); }
-.is-cine .cine-top, .is-cine .cine-bottom { transform: none; }
-.is-cine.cine-open .cine-top { transform: translateY(-101%); }
-.is-cine.cine-open .cine-bottom { transform: translateY(101%); }
+/* The opening shot: a title card fades through while the camera moves. */
 .cine-title {
   position: absolute; left: 50%; top: 46%; z-index: 5; opacity: 0; pointer-events: none; white-space: nowrap;
   font-size: clamp(46px, 13vw, 76px); color: #f6e3b5; text-shadow: 0 0 34px rgba(255, 196, 120, 0.65);
@@ -92,8 +86,8 @@
   position: absolute; right: 12px; bottom: 10px; z-index: 5; opacity: 0; pointer-events: none;
   font: 400 9.5px var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255, 240, 215, 0.7); transition: opacity 0.4s;
 }
-.is-cine:not(.cine-open) .cine-skip { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .is-cine .cine-title { animation: none; } .cine-bar { display: none; } }
+.is-cine .cine-skip { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .is-cine .cine-title { animation: none; } }
 .stage-fallback { padding: 60px 24px; text-align: center; color: var(--mute); }
 .bouquet-tools .btn { padding: 14px 20px; }
 .bouquet-tools .btn:disabled { opacity: 0.5; cursor: default; }

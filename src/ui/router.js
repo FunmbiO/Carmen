@@ -48,11 +48,21 @@ export function startRouter() {
     rz = setTimeout(() => cur && cur.scene.resize && cur.scene.resize(), 120);
   });
 
+  // A scene is drawn only while it is on screen. Scenes that ask for a frame cap (the 2D ones) get it on touch
+  // screens, where halving the redraws saves a lot of battery and keeps the page smooth.
+  const coarse = window.matchMedia('(pointer: coarse)').matches;
+  let acc = 0;
   const loop = () => {
     const now = performance.now() / 1000;
-    const dt = Math.min(0.05, now - last);
+    acc += Math.min(0.1, now - last);
     last = now;
-    if (!document.hidden && cur && cur.scene.draw) cur.scene.draw(now, dt);
+    const sc = cur && cur.scene;
+    if (!document.hidden && sc && sc.draw && (!sc.visible || sc.visible())) {
+      const cap = coarse && sc.maxFps ? 1 / sc.maxFps : 0;
+      if (!cap || acc >= cap - 0.004) { sc.draw(now, Math.min(0.05, acc)); acc = 0; }
+    } else {
+      acc = 0;
+    }
     requestAnimationFrame(loop);
   };
   route();

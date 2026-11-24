@@ -7,7 +7,7 @@ export const goldenMarkup = `
     <p class="lead">Drag the sun. This is what you look like to me, from gold to night.</p>
   </div>
   <div class="stage frame">
-    <canvas id="cv-golden" class="touch-surface" role="img" aria-label="A hilltop field at sunset. The sky moves from gold to honey to dusk to a night full of binary stars as the slider moves."></canvas>
+    <span class="scroll-lane lane-l" aria-hidden="true"></span><span class="scroll-lane lane-r" aria-hidden="true"></span><canvas id="cv-golden" class="touch-surface" role="img" aria-label="A hilltop field at sunset. The sky moves from gold to honey to dusk to a night full of binary stars as the slider moves."></canvas>
   </div>
   <div class="slider">
     <input id="gSlider" class="touch-surface" type="range" min="0" max="100" value="22" aria-label="Time of day">

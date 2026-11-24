@@ -8,6 +8,7 @@ export const bloomMarkup = `
   </div>
   <div class="stage frame stage-3d" id="stage3d">
     <canvas id="cv-bloom" class="touch-surface" tabindex="0" role="img" aria-label="A bouquet of roses, daisies and tulips in kraft paper with a gold ribbon. Drag to turn it, tap a flower, and use the arrow keys to rotate."></canvas>
+    <span class="scroll-lane lane-l" aria-hidden="true"></span><span class="scroll-lane lane-r" aria-hidden="true"></span>
     <p class="cine-title script" aria-hidden="true">For Carmen</p>
     <p class="cine-skip" aria-hidden="true">Tap to skip</p>
     <p class="stage-hint gone" id="bouquetHint">Drag to turn it &middot; Tap a flower</p>

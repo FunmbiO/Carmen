@@ -3,7 +3,7 @@ import { createStage } from './stage.js';
 import { mountThemeSwitch } from '../ui/theme-switch.js';
 import { onTheme } from '../lib/theme.js';
 import { REDUCE } from '../lib/util.js';
-import { playPage } from '../ui/music.js';
+import { playPage, whenReady, releaseIntro } from '../ui/music.js';
 
 const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
 
@@ -23,7 +23,7 @@ const MARKUP = `
   </div>
   <button class="intro-skip" id="intro-skip" type="button">Tap to skip</button>
   <div class="intro-gate" id="intro-gate">
-    <button class="gate-btn" id="intro-begin" type="button"><i class="gate-dot"></i><span>Tap to begin</span><small>Sound on</small></button>
+    <button class="gate-btn" id="intro-begin" type="button" disabled><i class="gate-dot"></i><span>Tap to begin</span><small id="gate-note">Getting the music ready</small></button>
   </div>
 `;
 
@@ -67,8 +67,18 @@ export function playIntro() {
         .to(skip, { opacity: 0, duration: 0.4 }, 6.0);
     }
 
-    q('#intro-begin').addEventListener('click', () => {
-      playPage('dark'); // "Whatever She Wants" plays under the opening
+    // The tap that starts the music only works if the music player is ready, so the button waits for it. If the
+    // player is slow or cannot load, the button still opens after a few seconds and the opening plays without music.
+    const begin = q('#intro-begin');
+    const note = q('#gate-note');
+    whenReady('intro').then((ok) => {
+      begin.disabled = false;
+      note.textContent = ok ? 'Sound on' : '';
+    });
+
+    begin.addEventListener('click', () => {
+      if (begin.disabled) return;
+      playPage('intro'); // "Whatever She Wants" plays under the opening
       gsap.to(gate, { opacity: 0, duration: 0.9, ease: 'power1.inOut', onComplete: () => gate.remove() });
       tl.play();
     });
@@ -80,6 +90,7 @@ export function playIntro() {
       if (entered) return;
       entered = true;
       playPage('bloom'); // started inside this tap, which is what lets the browser play it
+      releaseIntro(); // the opening's player is no longer needed
       const out = gsap.timeline({
         onComplete() {
           off();

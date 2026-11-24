@@ -22,7 +22,7 @@ import { mountGolden } from './pages/golden/index.js';
 import { mountDark } from './pages/dark/index.js';
 import { mountDust, setDustActive } from './ui/dust.js';
 import { mountCursor } from './ui/cursor.js';
-import { initMusic } from './ui/music.js';
+import { initMusic, releaseIntro } from './ui/music.js';
 import { mountSoundToggle } from './ui/sound-toggle.js';
 import { Sound } from './audio/engine.js';
 import { PAGE_MOODS } from './audio/page-moods.js';
@@ -33,7 +33,7 @@ mountDock();
 startScroll();
 mountSoundToggle();
 (window.requestIdleCallback || setTimeout)(() => Sound.preload());
-mountDust();
+mountDust().catch((err) => console.warn('The dust layer could not start', err));
 mountCursor();
 
 mountBloom();
@@ -54,9 +54,18 @@ onPage((name) => {
 const skipIntro = location.hash.length > 1 || new URLSearchParams(location.search).get('intro') === '0';
 (async () => {
   if (!skipIntro) {
-    // Three.js is only needed for the opening, so it loads on demand.
-    const { playIntro } = await import('./intro/intro.js');
-    await playIntro();
+    try {
+      // Three.js is only needed for the opening, so it loads on demand.
+      const { playIntro } = await import('./intro/intro.js');
+      await playIntro();
+    } catch (err) {
+      // No WebGL, or anything else going wrong, must never leave a blank page: skip the opening and go in.
+      console.error('The opening could not play, going straight in', err);
+      const intro = document.getElementById('intro');
+      intro.hidden = true;
+      intro.innerHTML = '';
+    }
   }
+  releaseIntro(); // however she got in, the opening's music player is no longer needed
   startRouter();
 })();

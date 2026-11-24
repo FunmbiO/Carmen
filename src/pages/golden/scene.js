@@ -98,13 +98,19 @@ export function createGolden(cv) {
     const r = cv.getBoundingClientRect();
     setT((e.clientX - r.left) / r.width);
   };
-  cv.addEventListener('pointerdown', (e) => { S.down = true; pointer(e); });
+  cv.addEventListener('pointerdown', (e) => {
+    S.down = true;
+    try { cv.setPointerCapture(e.pointerId); } catch { /* not capturable */ } // keep the drag even if the finger slips off
+    pointer(e);
+  });
   cv.addEventListener('pointermove', (e) => {
     const r = cv.getBoundingClientRect();
     S.px = clamp((e.clientX - r.left) / r.width);
     if (S.down) pointer(e);
   });
-  window.addEventListener('pointerup', () => { S.down = false; });
+  const release = () => { S.down = false; };
+  window.addEventListener('pointerup', release);
+  window.addEventListener('pointercancel', release);
   $('gSlider').addEventListener('input', (e) => setT(e.target.value / 100));
   setT(0.22);
 

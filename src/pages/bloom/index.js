@@ -5,7 +5,6 @@ import { mountTilt } from '../../ui/tilt.js';
 import { activateSong, deactivateSong } from '../../ui/music.js';
 import { bloomMarkup, bloomCode } from './markup.js';
 
-const LIMIT = 44;
 
 export function mountBloom() {
   const root = $('v-bloom');
@@ -20,7 +19,10 @@ export function mountBloom() {
   let failed = false;
   let entered = false;
 
-  const setCount = (n) => { countEl.textContent = n >= LIMIT ? `${n} flowers. That's a full bouquet.` : `${n} flower${n === 1 ? '' : 's'}`; };
+  const setCount = (n) => {
+    const full = api && n >= api.max;
+    countEl.textContent = full ? `${n} flowers. That's a full bouquet.` : `${n} flower${n === 1 ? '' : 's'}`;
+  };
   const quietHint = () => { touched = true; hint.classList.add('gone'); };
 
   async function load() {
@@ -52,7 +54,7 @@ export function mountBloom() {
   $('again').addEventListener('click', () => api && api.replay());
   $('addFlower').addEventListener('click', () => {
     if (!api) return;
-    if (!api.addFlower()) { setCount(LIMIT); return; }
+    if (!api.addFlower()) { setCount(api.count()); return; }
     quietHint();
   });
   $('scatter').addEventListener('click', () => { if (api) { api.scatter(); quietHint(); } });

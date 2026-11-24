@@ -338,6 +338,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
   return {
     draw, resize, replay, addFlower: addMore, scatter, snapshot,
     count: () => branches.length,
+    max: MAX_FLOWERS,
     onInteract(fn) { onInteract = fn; },
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles }),
     /** hooks: { start, bars, end } fire during the opening shot. */

@@ -18,7 +18,7 @@ window.YT={PlayerState:{PLAYING:1,PAUSED:2,ENDED:0,BUFFERING:3},Player:function(
   this.pauseVideo=()=>{__log.push('pause '+vid);set(2)};this.setVolume=()=>{};this.getDuration=()=>200;this.getCurrentTime=()=>t;this.seekTo=(s)=>{t=s};
   this.loadVideoById=this.cueVideoById=(v)=>{vid=v};this.destroy=()=>{f.remove();__log.push('destroy')};
   const n=(window.__built=(window.__built||0)+1);
-  const delay=(window.__cfg.readyDelay||30)+(window.__cfg.neverReadyFirst&&n<=4?1e9:0);
+  const delay=(window.__cfg.readyDelay||30)+(window.__cfg.neverReadyFirst&&n<=2?1e9:0);
   setTimeout(()=>ev.onReady({}),delay);
 }};
 window.onYouTubeIframeAPIReady&&window.onYouTubeIframeAPIReady();`;
@@ -55,4 +55,33 @@ async function run(name, cfg, steps) {
     const playing = await p.evaluate(() => document.querySelector('#v-bloom .sound').classList.contains('is-playing'));
     return `afterTapPlaying=${playing}`;
   });
+  // H: the opening fails (WebGL is off here), and the app must still start rather than show a blank page
+  {
+    const b = await chromium.launch({ args: ['--disable-webgl', '--disable-3d-apis'] });
+    const p = await (await b.newContext({ viewport: { width: 390, height: 900 } })).newPage();
+    await p.route('https://www.youtube.com/iframe_api*', (r) => r.fulfill({ contentType: 'application/javascript', body: FAKE }));
+    await p.goto('http://127.0.0.1:4173/');
+    await p.waitForTimeout(4000);
+    const visible = await p.evaluate(() => [...document.querySelectorAll('.view')].filter((v) => !v.hidden).map((v) => v.id).join());
+    const introGone = await p.evaluate(() => document.getElementById('intro').hidden);
+    console.log(`${'H opening fails, app still starts'.padEnd(34)} page=${visible} introHidden=${introGone}`);
+    await b.close();
+  }
+  // I: only the open page and its neighbours keep a player; the rest are taken down
+  {
+    const b = await chromium.launch({ args: ['--disable-webgl', '--disable-3d-apis'] });
+    const p = await (await b.newContext({ viewport: { width: 390, height: 900 } })).newPage();
+    await p.route('https://www.youtube.com/iframe_api*', (r) => r.fulfill({ contentType: 'application/javascript', body: FAKE }));
+    await p.goto('http://127.0.0.1:4173/#bloom');
+    await p.waitForTimeout(3500);
+    const alive = () => p.evaluate(() => [...document.querySelectorAll('.sound[data-song]')].filter((c) => c.querySelector('iframe')).map((c) => c.dataset.song).join(','));
+    const steps = ['start on bloom: ' + (await alive())];
+    for (const h of ['bouquet', 'golden-hour', 'after-dark']) {
+      await p.click(`.dock a[data-p="${h}"]`); await p.waitForTimeout(4200);
+      steps.push(h + ': ' + (await alive()));
+    }
+    console.log(`${'I players alive at each page'.padEnd(34)} ${steps.join('  |  ')}`);
+    await b.close();
+  }
 })();
+

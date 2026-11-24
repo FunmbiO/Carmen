@@ -8,8 +8,8 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { palette, onTheme } from '../../lib/theme.js';
 import { REDUCE, clamp } from '../../lib/util.js';
 import { vivid, hsl } from './colors3d.js';
-import { START_FLOWERS, MAX_FLOWERS, REACH, specAt, hydrangeaSlots } from './plan3d.js';
-import { planLayout, placeNew, outward, COLLIDE, DOME } from './layout3d.js';
+import { START_FLOWERS, MAX_FLOWERS, specAt, hydrangeaSlots } from './plan3d.js';
+import { planLayout, placeNew, outward } from './layout3d.js';
 import { buildRose, buildPeony, buildTulip, buildDaisy, buildSunflower, flowerMaterial, tintFlower } from './flowers3d.js';
 import { buildLavender, buildHydrangea, buildGreens, budMaterial } from './fillers3d.js';
 import { buildWrap } from './wrap3d.js';
@@ -20,7 +20,6 @@ import { createCinema, CINEMA } from './cinema3d.js';
 // baby's breath and eucalyptus, in coloured paper and a satin bow. Drag to turn it, tap a flower, add more.
 
 const UP = new Vector3(0, 1, 0);
-const GOLDEN = 2.39996323;
 const GATHER = new Vector3(0, -0.7, 0); // where every stem meets, inside the paper
 export { START_FLOWERS, MAX_FLOWERS };
 

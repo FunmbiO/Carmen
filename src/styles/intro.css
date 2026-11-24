@@ -83,3 +83,6 @@
 @media (prefers-reduced-motion: reduce) { .gate-dot { animation: none; } }
 
 @media (pointer: coarse) { .intro-grain { display: none; } }
+
+.gate-btn:disabled { cursor: default; }
+.gate-btn:disabled .gate-dot { opacity: 0.45; animation-duration: 3s; }

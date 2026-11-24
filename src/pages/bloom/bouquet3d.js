@@ -105,7 +105,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     const curve = new CatmullRomCurve3([new Vector3(0, 0, 0), new Vector3(H.x * 0.3, H.y * 0.55, H.z * 0.3), H]);
     const branch = new Group();
     branch.position.copy(GATHER);
-    branch.add(new Mesh(new TubeGeometry(curve, 26, 0.016, 6, false), stemMat));
+    branch.add(new Mesh(new TubeGeometry(curve, 18, 0.016, 5, false), stemMat));
     const head = builder(mat);
     head.group.position.copy(H);
     const out = new Vector3(...outward([slot.x, slot.y, slot.z])).multiplyScalar(faceOut)

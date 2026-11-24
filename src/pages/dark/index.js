@@ -6,6 +6,7 @@ import { activateSong, deactivateSong } from '../../ui/music.js';
 import { goldBurst } from '../../ui/confetti.js';
 import { revealLines, revealBlocks } from '../../ui/reveal.js';
 import { darkMarkup, chanceCode } from './markup.js';
+import { REPLIES } from './replies.js';
 import { createRain } from './rain.js';
 
 export function mountDark() {
@@ -14,14 +15,16 @@ export function mountDark() {
   const rain = createRain($('cv-dark'));
   const answer = $('answer');
 
-  $('yes').addEventListener('click', () => {
-    answer.textContent = "That's all I'm asking. Thank you for reading this far.";
-    rain.rush();
-    goldBurst({ x: 0.5, y: 0.75 });
-  });
-  $('no').addEventListener('click', () => {
-    answer.textContent = "That's completely okay. I hope this made you smile anyway.";
-    rain.rush();
+  const replies = root.querySelectorAll('.reply');
+  replies.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const r = REPLIES.find((x) => x.id === btn.dataset.reply);
+      if (!r) return;
+      replies.forEach((b) => { const on = b === btn; b.classList.toggle('is-chosen', on); b.setAttribute('aria-pressed', String(on)); });
+      answer.textContent = r.answer;
+      rain.rush();
+      if (r.warm) goldBurst({ x: 0.5, y: 0.75 });
+    });
   });
 
   registerPage('after-dark', {

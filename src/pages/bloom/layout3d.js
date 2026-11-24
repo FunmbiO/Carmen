@@ -111,7 +111,7 @@ export function planLayout(items, { seed = 7, maxOverlap = 0.1 } = {}) {
  * Find the roomiest spot for one more head, given the heads already placed ({ p, r } with r the solid radius).
  * Tries many random spots in the allowed band and keeps the one with the most clearance.
  */
-export function placeNew(placed, reach, { thMin = 0, thMax = DOME.THMAX + 0.05, hMin = 0, hMax = DOME.HMAX + 0.3, tries = 500, seed = 1 } = {}) {
+export function placeNew(placed, reach, { thMin = 0, thMax = DOME.THMAX + 0.12, hMin = 0, hMax = DOME.HMAX + 0.6, tries = 700, seed = 1 } = {}) {
   const rand = rng(seed + placed.length * 131);
   const r = reach * COLLIDE;
   let best = null;

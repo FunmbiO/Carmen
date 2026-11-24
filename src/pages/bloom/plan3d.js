@@ -4,7 +4,7 @@ import { DOME } from './layout3d.js';
 // What goes in the bouquet. Pure data and no Three.js, so the layout can be checked in Node.
 
 export const START_FLOWERS = 26;
-export const MAX_FLOWERS = 44;
+export const MAX_FLOWERS = 40;
 
 const TYPES = ['rose', 'peony', 'daisy', 'tulip', 'rose', 'sunflower', 'peony', 'daisy', 'rose', 'tulip'];
 // The size each kind is drawn at, and how far its petals reach from the centre of the head at size 1.

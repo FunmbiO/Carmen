@@ -2,7 +2,7 @@ import { mk } from '../../lib/flowers.js';
 
 // Seven flowers, each one a quality and a line of code.
 export const QUALITIES = [
-  { fn: 'grace()', title: 'Grace', line: 'Even through a screen, you carry yourself like you have all the time in the world. That kind of calm is rare.', code: 'return calm * confidence;',
+  { fn: 'grace()', title: 'Grace', line: "Even just through a screen I can feel your essence. You carry yourself with elegance, and a glow that leaves an impression.", code: 'return calm * confidence;',
     hx: 0.5, hy: 0.17, s: 0.13, f: mk({ petals: 6, layers: 2, hue: 42, w: 0.28, pt: 0.8, glyphs: 20, drop: 0.2 }) },
   { fn: 'class()', title: 'Class', line: "Luxury that isn't loud. It shows in how you present yourself, and it makes whatever is around you look better.", code: 'return luxury - noise;',
     hx: 0.27, hy: 0.25, s: 0.115, f: mk({ petals: 7, layers: 5, hue: 28, w: 0.45, glyphs: 26, drop: 0.16 }) },

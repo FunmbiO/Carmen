@@ -7,6 +7,7 @@ import { goldBurst } from '../../ui/confetti.js';
 import { revealLines, revealBlocks } from '../../ui/reveal.js';
 import { darkMarkup, chanceCode } from './markup.js';
 import { REPLIES } from './replies.js';
+import { recordPick, watchConnection } from './notify.js';
 import { createRain } from './rain.js';
 
 export function mountDark() {
@@ -24,8 +25,11 @@ export function mountDark() {
       answer.textContent = r.answer;
       rain.rush();
       if (r.warm) goldBurst({ x: 0.5, y: 0.75 });
+      recordPick(r.id); // lets the site owner know, in order
     });
   });
+
+  watchConnection(); // retry any pick that could not be sent earlier
 
   registerPage('after-dark', {
     scene: {

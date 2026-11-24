@@ -14,6 +14,6 @@ export const QUALITIES = [
     hx: 0.88, hy: 0.43, s: 0.1, f: mk({ petals: 8, layers: 4, hue: 8, w: 0.5, glyphs: 24 }) },
   { fn: 'earth()', title: 'Earth', line: "I just see a measure of Mother Nature in you.", code: 'return roots.deep;',
     hx: 0.36, hy: 0.43, s: 0.105, f: mk({ petals: 5, layers: 2, hue: 78, sat: 70, w: 0.42, glyphs: 22 }) },
-  { fn: 'pearl()', title: 'Pearl', line: 'Rare, quietly bright, and worth being patient for.', code: 'return rare && radiant;',
+  { fn: 'pearl()', title: 'Pearl', line: "Rare, lasting, bright, expensive and worth spending on.", code: 'return rare && radiant;',
     hx: 0.64, hy: 0.43, s: 0.105, f: mk({ petals: 8, layers: 3, hue: 40, sat: 32, dl: 16, w: 0.4, glyphs: 26 }) },
 ];

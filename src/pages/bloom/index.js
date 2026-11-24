@@ -81,6 +81,7 @@ export function mountBloom() {
       leave() { deactivateSong(root); },
       resize() { if (api) api.resize(); },
       draw(now, dt) { if (api) api.draw(now, dt); },
+      visible: () => (api ? api.visible() : true),
     },
   });
 }

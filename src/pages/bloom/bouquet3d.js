@@ -15,6 +15,7 @@ import { buildLavender, buildHydrangea, buildGreens, budMaterial } from './fille
 import { buildWrap } from './wrap3d.js';
 import { createEffects } from './effects3d.js';
 import { createCinema, CINEMA } from './cinema3d.js';
+import { watchVisible } from '../../lib/visible.js';
 
 // A bouquet built by hand in Three.js: roses, peonies, daisies, sunflowers and tulips, with lavender, hydrangea,
 // baby's breath and eucalyptus, in coloured paper and a satin bow. Drag to turn it, tap a flower, add more.
@@ -249,6 +250,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     camera.updateProjectionMatrix();
   }
 
+  const isVisible = watchVisible(canvas);
   let time = 0;
   function growth(b, dt, openAfter = 0.8) {
     b.age += dt;
@@ -257,6 +259,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     b.head.setOpen(easeOutCubic(clamp((b.age - b.delay - openAfter) / 1.4)));
   }
   function draw(now, dt) {
+    if (!isVisible()) return; // scrolled out of sight: no point drawing
     time += dt;
     const playing = cinema.update(dt);
     const k = cinema.lightK();
@@ -338,6 +341,7 @@ export function createBouquet3D(canvas, { onCount } = {}) {
     draw, resize, replay, addFlower: addMore, scatter, snapshot,
     count: () => branches.length,
     max: MAX_FLOWERS,
+    visible: isVisible,
     onInteract(fn) { onInteract = fn; },
     stats: () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles }),
     /** hooks: { start, end } fire during the opening shot. */

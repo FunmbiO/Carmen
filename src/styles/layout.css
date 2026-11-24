@@ -96,3 +96,6 @@
     background: color-mix(in srgb, var(--bg) 94%, transparent);
   }
 }
+
+#dust { transition: opacity 0.8s var(--ease); }
+#dust.rest { opacity: 0; }

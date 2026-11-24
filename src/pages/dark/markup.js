@@ -1,4 +1,7 @@
 import { soundCard, codeBlock } from '../parts.js';
+import { REPLIES } from './replies.js';
+
+const replyButtons = REPLIES.map((r) => `<button class="reply" type="button" data-reply="${r.id}" aria-pressed="false">${r.label}</button>`).join('');
 
 export const darkMarkup = `
   <span class="eyebrow"><em>IV</em> After dark</span>
@@ -14,12 +17,8 @@ export const darkMarkup = `
     <p class="reveal-lines letter-close">Hope to meet you some day.</p>
     <div class="sig"><span class="signame script">Funmbi</span><span class="seal script" aria-hidden="true">F</span></div>
   </article>
-  <div class="ask panel chamfer">
-    <h3 class="foil">Would you ever give me a chance?</h3>
-    <div class="row">
-      <button id="yes" class="btn primary" type="button">Maybe someday</button>
-      <button id="no" class="btn" type="button">Not right now</button>
-    </div>
+  <div class="ask panel chamfer" role="group" aria-label="Your reply">
+    <div class="replies">${replyButtons}</div>
     <p class="answer" id="answer" aria-live="polite">&nbsp;</p>
   </div>
   ${codeBlock('chance.js', 'code-chance')}

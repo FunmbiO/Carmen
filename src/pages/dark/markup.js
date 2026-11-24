@@ -21,7 +21,6 @@ export const darkMarkup = `
     <h3 class="verdict foil">What’s the verdict?</h3>
     <div class="replies">${replyButtons}</div>
     <p class="answer" id="answer" aria-live="polite">&nbsp;</p>
-    <p class="verdict-note">Whichever you tap gets sent to me.</p>
   </div>
   ${codeBlock('promise.js', 'code-chance')}
   ${soundCard('dark')}

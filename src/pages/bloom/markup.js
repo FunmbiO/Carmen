@@ -22,7 +22,7 @@ export const bloomMarkup = `
     <button id="scatter" class="btn" type="button">Let the petals go</button>
     <button id="snap" class="btn" type="button">Save a snapshot</button>
   </div>
-  <span class="hint" id="bouquetCount" aria-live="polite">9 flowers</span>
+  <span class="hint" id="bouquetCount" aria-live="polite">26 flowers</span>
   <div class="orn" aria-hidden="true"><i></i></div>
   <figure class="code panel">
     <figcaption><span>bouquet.js</span><span>◆</span></figcaption>

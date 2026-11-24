@@ -11,9 +11,11 @@ export const bloomMarkup = `
     <span class="scroll-lane lane-l" aria-hidden="true"></span><span class="scroll-lane lane-r" aria-hidden="true"></span>
     <p class="cine-title script" aria-hidden="true">For Carmen</p>
     <p class="cine-skip" aria-hidden="true">Tap to skip</p>
-    <button class="scroll-down" id="scrollDown" type="button" aria-label="Scroll down past the bouquet">Scroll down <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
     <p class="stage-hint gone" id="bouquetHint">Drag to turn it &middot; Tap a flower</p>
     <p class="stage-fallback" id="bouquetFallback" hidden>Your browser can't draw the 3D bouquet. The rest of the page still works.</p>
+  </div>
+  <div class="scroll-down-wrap">
+    <button class="scroll-down" id="scrollDown" type="button" aria-label="Scroll down past the bouquet">Scroll down <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
   </div>
   <div class="row bouquet-tools">
     <button id="again" class="btn primary" type="button">Bloom again</button>

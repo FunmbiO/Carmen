@@ -33,10 +33,10 @@ The stage is dark in every theme (`--cine-deep` and `--cine-glow` in `tokens.css
 
 `src/intro/` builds about 9,500 points (5,200 on phones), each with a scattered start and a target on the flower. A vertex shader moves them between the two; GSAP drives `uProgress` and `uExplode`. The intro is loaded with a dynamic import so Three.js is not part of the main bundle.
 
-## Audio
+## Small helpers
 
-`src/audio/engine.js` is a thin facade. `tone-engine.js` builds the Tone.js chain (filter, reverb, compressor) and runs a 16-step pattern per mood from `moods.js`, using the voices in `voices.js`. It is preloaded when the browser is idle and started by a click, because browsers require a gesture.
+The gold dust (`ui/dust.js`), typed code (`ui/typewriter.js`) and scroll reveals (`ui/reveal.js`, an IntersectionObserver) are a few dozen lines each, with no library behind them. The four dock icons are inline SVG.
 
 ## Builds
 
-`npm run build` splits Three.js, Tone.js and GSAP into their own chunks. `npm run build:single` inlines everything, fonts included, into one HTML file of about 2 MB that works from disk.
+`npm run build` splits Three.js and GSAP into their own chunks. `npm run build:single` inlines everything, fonts included, into one HTML file of about 2 MB that works from disk.

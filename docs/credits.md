@@ -6,14 +6,9 @@
 | --- | --- |
 | Vite, vite-plugin-singlefile | Build and single-file output |
 | three | Opening particle flower |
-| gsap (ScrollTrigger, SplitText) | Timelines, transitions, scroll reveals |
+| gsap | Opening timeline and page transitions |
 | lenis | Smooth scrolling |
-| tone | Live-synthesised soundtrack |
-| @tsparticles/slim | Drifting gold dust |
-| typed.js | Typed code snippets |
 | canvas-confetti | Gold burst |
-| vanilla-tilt | Panel tilt |
-| lucide | Dock icons |
 | @fontsource packages | Self-hosted fonts |
 
 ## Fonts

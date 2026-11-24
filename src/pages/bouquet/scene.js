@@ -6,6 +6,7 @@ import { leaf } from '../../lib/flowers.js';
 import { REDUCE, TAU, GLYPHS, clamp, ease, rnd, fit } from '../../lib/util.js';
 import { $ } from '../../lib/util.js';
 import { goldBurst } from '../../ui/confetti.js';
+import { watchVisible } from '../../lib/visible.js';
 import { QUALITIES as Q } from './data.js';
 
 // Scene II: a bouquet of seven flowers. Tap one to read it.
@@ -184,5 +185,6 @@ export function createBouquet(cv) {
   });
 
   buildChips();
-  return { enter() { resize(); }, leave() {}, resize, draw };
+  const visible = watchVisible(cv);
+  return { enter() { resize(); }, leave() {}, resize, draw, visible, maxFps: 30 };
 }

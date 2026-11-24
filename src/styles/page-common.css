@@ -66,3 +66,15 @@
 .stage-fallback { padding: 60px 24px; text-align: center; color: var(--mute); }
 .bouquet-tools .btn { padding: 14px 20px; }
 .bouquet-tools .btn:disabled { opacity: 0.5; cursor: default; }
+
+/* Touch surfaces: a drag that starts on one belongs to it and never scrolls the page.
+   The page margins and the text around them stay free for scrolling. */
+.touch-surface,
+.stage canvas.touch-surface {
+  touch-action: none;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}

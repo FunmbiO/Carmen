@@ -27,6 +27,7 @@ export const bloomMarkup = `
   <div class="bouquet-notes">
     <p class="bouquet-note">I want to preface this by saying, I don’t want to be that man that’s ruining your peace.</p>
     <p class="bouquet-note">I remember your words; “…i’m not trynna be anything other than friends w nb rn”. So this isn’t me pushing it. Promise.</p>
+    <p class="bouquet-note">This also isn’t one of those situations where it’s like “I was nice to him once now he’s doing too much”. I’m doing it because I want to, not because of any misinterpreted communication :)</p>
     <p class="bouquet-note">Keeping it P, I’m not sure if you like flowers. If anything this seems very cliché and generic. However, I thought to give it a lil twist, so here’s a digital bouquet I made by hand, and you can interact with it.</p>
   </div>
   <div class="orn" aria-hidden="true"><i></i></div>
